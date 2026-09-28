@@ -1,4 +1,4 @@
-// Formulario de revendedores: valida y envía la solicitud por WhatsApp.
+// Formulario de emprendedores: valida y envía la solicitud por WhatsApp.
 (function () {
   "use strict";
 
@@ -31,7 +31,7 @@
       })
       .map(function (c) { return c.nombre; });
 
-    let mensaje = "Hola Studio 3, quiero ser revendedor.\n\n" +
+    let mensaje = "Hola Studio 3, quiero ser emprendedor.\n\n" +
       "Nombre: " + S.limpiar(form.elements.nombre.value) + "\n" +
       "Ciudad o departamento: " + S.limpiar(form.elements.ciudad.value);
     if (negocio) mensaje += "\nNegocio: " + negocio;

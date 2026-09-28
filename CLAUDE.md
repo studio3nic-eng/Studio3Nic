@@ -93,7 +93,7 @@ If `logo-plano.svg` isn't there yet, render the wordmark as text: "STUDIO" in Po
 
 ## Pages and copy
 
-**Header:** logo · Inicio · Tienda · Revendedores · Ayuda · cart button with counter (counter hidden at 0).
+**Header:** logo · Inicio · Tienda · ¿Quieres emprender? (page revendedores.html) · Ayuda · cart button with counter (counter hidden at 0).
 On phones the links collapse into a "Menú" button; the cart stays visible.
 
 **Inicio:** hero — eyebrow "TECNOLOGÍA Y ACCESORIOS", H1 "Todo para tus dispositivos", subtitle
@@ -103,7 +103,7 @@ category tiles (link to `tienda.html?cat=…`) → 8 featured products (`destaca
 "Cómo comprar": 1. Elige tus productos y agrégalos al carrito. 2. Toca "Enviar pedido por WhatsApp".
 3. Te confirmamos disponibilidad, total y entrega por chat. → trust points (Ventas al por mayor y al
 detalle · Envíos a todo Nicaragua · Garantía en todos los productos · Entrega gratis en Masaya) →
-reseller teaser "¿Quieres revender? Precios especiales por volumen." + "Quiero ser revendedor" →
+reseller teaser "¿Quieres emprender? Precios especiales por volumen." + "Quiero ser emprendedor" →
 social block "Síguenos: @studio3.ni".
 
 **Tienda:** chips `Todos` + 6 categories (`data-cat`, `aria-pressed`), grid `#productos`.
@@ -131,13 +131,13 @@ Ciudad: Masaya
 ```
 (Nombre/Ciudad lines only if filled.)
 
-**Revendedores:** benefits (precios por volumen, prioridad en inventario, fotos para tus redes,
+**¿Quieres emprender? (revendedores.html; all customer-facing text says "emprendedor", never "revendedor"):** benefits (precios por volumen, prioridad en inventario, fotos para tus redes,
 misma garantía) → how it works (aplica → revisamos y te enviamos la lista de precios por WhatsApp →
 primer pedido) → requirements (pedido mínimo inicial) → form `#form-revendedor`:
 Nombre completo* · Nombre del negocio · Ciudad o departamento* · Canal de venta (Tienda física /
 Redes sociales / Ambos) · Productos de interés (checkbox per category, name="interes") ·
 Volumen mensual estimado (10–24 / 25–49 / 50 o más unidades). Submit → validate with
-`reportValidity()` → WhatsApp message starting "Hola Studio 3, quiero ser revendedor."
+`reportValidity()` → WhatsApp message starting "Hola Studio 3, quiero ser emprendedor."
 Wholesale prices are NEVER shown on the site.
 
 **Ayuda:** Cómo comprar · Envíos · Garantía · Preguntas frecuentes · Privacidad:
