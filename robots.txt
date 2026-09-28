@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://TU-DOMINIO/sitemap.xml
+Sitemap: https://studio3nic-eng.github.io/Studio3Nic/sitemap.xml
