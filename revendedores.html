@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>¿Quieres emprender? | Studio 3</title>
-<meta name="description" content="Emprende vendiendo accesorios de tecnología con Studio 3. Precios por volumen, prioridad en inventario y fotos para tus redes. Aplica por WhatsApp.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<title>¿Quieres emprender? | Studio 3</title>
+<meta name="description" content="Emprende vendiendo accesorios de tecnología con Studio 3. Precios por volumen, prioridad en inventario y fotos para tus redes. Aplica por WhatsApp.">
+<link rel="canonical" href="https://studio3nic-eng.github.io/Studio3Nic/revendedores.html">
 <meta name="theme-color" content="#1F6FEB">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Studio 3">
@@ -21,7 +22,7 @@
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+<body data-base="">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <header class="cabecera">
   <div class="contenedor cabecera-fila">
@@ -51,6 +52,10 @@
   <div class="drawer-cuerpo">
     <p class="vacio" id="carrito-vacio">Tu carrito está vacío. ¡Explora la tienda!</p>
     <ul class="lineas" id="carrito-lineas"></ul>
+    <div class="complementa" id="carrito-complementa" hidden>
+      <h3>Complementa tu compra</h3>
+      <ul class="sugerencias" id="carrito-sugerencias"></ul>
+    </div>
   </div>
   <div class="drawer-pie">
     <div class="campo">
@@ -60,6 +65,7 @@
         <option value="otro">Otro departamento: envío por CargoTrans</option>
       </select>
     </div>
+    <p class="envio-aviso" id="carrito-envio" hidden></p>
     <div class="campo">
       <label for="carrito-nombre">Nombre (opcional)</label>
       <input type="text" id="carrito-nombre" maxlength="60" autocomplete="name">
@@ -196,6 +202,18 @@
           </a>
         </div>
       </div>
+      <nav aria-label="Categorías">
+        <h2>Categorías</h2>
+        <ul>
+          <li><a href="categoria/power-banks.html">Power Banks</a></li>
+          <li><a href="categoria/parlantes.html">Parlantes</a></li>
+          <li><a href="categoria/cargadores.html">Cargadores</a></li>
+          <li><a href="categoria/audifonos.html">Audífonos</a></li>
+          <li><a href="categoria/smartwatches.html">Smartwatches</a></li>
+          <li><a href="categoria/cables.html">Cables</a></li>
+          <li><a href="categoria/combos.html">Combos</a></li>
+        </ul>
+      </nav>
       <nav aria-label="Páginas">
         <h2>Páginas</h2>
         <ul>

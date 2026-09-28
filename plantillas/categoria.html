@@ -1,0 +1,28 @@
+<div class="contenedor">
+  <nav class="migas" aria-label="Ruta">
+    <ol>
+      <li><a href="{{P}}index.html">Inicio</a></li>
+      <li><a href="{{P}}tienda.html">Tienda</a></li>
+      <li><span aria-current="page">{{CAT_NOMBRE}}</span></li>
+    </ol>
+  </nav>
+  <div class="pagina-cab">
+    <p class="eyebrow">{{CAT_NOMBRE}}</p>
+    <h1>{{CAT_TITULO}}</h1>
+    <p>{{CAT_DESC}}</p>
+  </div>
+  <nav class="chips" aria-label="Categorías">
+{{CAT_CHIPS}}
+  </nav>
+  <p class="conteo">{{CAT_CONTEO}}</p>
+  <div class="grilla-productos" data-lista="categoria:{{CAT_ID}}">
+{{CAT_PRODUCTOS}}
+  </div>
+  <div class="banda banda-clara">
+    <div>
+      <h2>¿No encuentras lo que buscas?</h2>
+      <p>Escríbenos y te decimos qué tenemos disponible.</p>
+    </div>
+    <a class="btn btn-wa" href="https://wa.me/50587146561" data-wa target="_blank" rel="noopener noreferrer">Escríbenos por WhatsApp</a>
+  </div>
+</div>

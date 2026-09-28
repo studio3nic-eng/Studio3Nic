@@ -38,6 +38,8 @@
     if (canal) mensaje += "\nCanal de venta: " + canal;
     if (interes.length) mensaje += "\nProductos de interés: " + interes.join(", ");
     if (volumen) mensaje += "\nVolumen mensual estimado: " + volumen;
+    const vengo = S.origen();
+    if (vengo) mensaje += "\nVengo de: " + vengo;
 
     S.abrirWhatsApp(mensaje);
   });

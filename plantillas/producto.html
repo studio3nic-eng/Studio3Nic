@@ -1,0 +1,34 @@
+<div class="contenedor">
+  <nav class="migas" aria-label="Ruta">
+    <ol>
+      <li><a href="{{P}}index.html">Inicio</a></li>
+      <li><a href="{{P}}categoria/{{CAT_ID}}.html">{{CAT_NOMBRE}}</a></li>
+      <li><span aria-current="page">{{NOMBRE}}</span></li>
+    </ol>
+  </nav>
+  <div class="producto-grid">
+    <img class="producto-img" src="{{IMG}}" width="800" height="800" alt="{{NOMBRE}}">
+    <div class="producto-info">
+      <p class="eyebrow"><a href="{{P}}categoria/{{CAT_ID}}.html">{{CAT_NOMBRE}}</a></p>
+      <h1 class="producto-nombre">{{NOMBRE}}</h1>
+      <p class="producto-precio" data-precio="{{ID}}">{{PRECIO}}</p>
+      <p class="estado{{ESTADO_CLASE}}" data-estado="{{ID}}">{{ESTADO}}</p>
+{{INCLUYE}}      <p class="producto-desc">{{DESC_PROD}}</p>
+      <div class="producto-acciones">
+        {{BOTON}}
+        <a class="btn btn-secundario" href="{{WA_URL}}" target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a>
+      </div>
+      <ul class="lista-check producto-confianza">
+        <li>Entrega gratis en Masaya</li>
+        <li>Envíos a todo Nicaragua por CargoTrans</li>
+        <li>Garantía en todos los productos</li>
+      </ul>
+    </div>
+  </div>
+  <section class="seccion" aria-labelledby="t-relacionados">
+    <div class="seccion-cab"><h2 id="t-relacionados">También te puede interesar</h2></div>
+    <div class="grilla-productos" data-lista="relacionados:{{ID}}">
+{{RELACIONADOS}}
+    </div>
+  </section>
+</div>

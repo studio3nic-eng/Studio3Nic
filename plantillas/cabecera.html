@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>{{TITULO}}</title>
+<meta name="description" content="{{DESC}}">
+{{HEAD_EXTRA}}<meta name="theme-color" content="#1F6FEB">
+<meta property="og:type" content="{{OG_TIPO}}">
+<meta property="og:site_name" content="Studio 3">
+<meta property="og:locale" content="es_NI">
+<meta property="og:title" content="{{TITULO}}">
+<meta property="og:description" content="{{DESC}}">
+<meta property="og:url" content="{{URL}}">
+{{OG_IMAGEN}}<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="{{P}}img/favicon.svg">
+<link rel="stylesheet" href="{{P}}css/estilos.css">
+{{JSONLD}}</head>
+<body data-base="{{P}}">
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera">
+  <div class="contenedor cabecera-fila">
+    <a class="marca" href="{{P}}index.html" aria-label="Studio 3, ir al inicio"><span class="marca-texto">STUDIO<sup>3</sup></span></a>
+    <nav class="nav" id="nav-principal" aria-label="Principal">
+      <a href="{{P}}index.html"{{A_inicio}}>Inicio</a>
+      <a href="{{P}}tienda.html"{{A_tienda}}>Tienda</a>
+      <a href="{{P}}revendedores.html"{{A_emprender}}>¿Quieres emprender?</a>
+      <a href="{{P}}ayuda.html"{{A_ayuda}}>Ayuda</a>
+    </nav>
+    <div class="cabecera-acciones">
+      <button type="button" class="btn-menu" id="btn-menu" aria-expanded="false" aria-controls="nav-principal">Menú</button>
+      <button type="button" class="btn-carrito" id="btn-carrito" aria-label="Abrir carrito">
+        <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l1 13H5zM9 7a3 3 0 016 0"/></svg>
+        <span class="contador" id="contador" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="carrito" role="dialog" aria-modal="true" aria-labelledby="carrito-titulo" aria-hidden="true">
+  <div class="drawer-cab">
+    <h2 id="carrito-titulo">Tu carrito</h2>
+    <button type="button" class="cerrar" id="cerrar-carrito" aria-label="Cerrar carrito">×</button>
+  </div>
+  <div class="drawer-cuerpo">
+    <p class="vacio" id="carrito-vacio">Tu carrito está vacío. ¡Explora la tienda!</p>
+    <ul class="lineas" id="carrito-lineas"></ul>
+    <div class="complementa" id="carrito-complementa" hidden>
+      <h3>Complementa tu compra</h3>
+      <ul class="sugerencias" id="carrito-sugerencias"></ul>
+    </div>
+  </div>
+  <div class="drawer-pie">
+    <div class="campo">
+      <label for="carrito-entrega">Entrega</label>
+      <select id="carrito-entrega">
+        <option value="masaya">Masaya: entrega gratis</option>
+        <option value="otro">Otro departamento: envío por CargoTrans</option>
+      </select>
+    </div>
+    <p class="envio-aviso" id="carrito-envio" hidden></p>
+    <div class="campo">
+      <label for="carrito-nombre">Nombre (opcional)</label>
+      <input type="text" id="carrito-nombre" maxlength="60" autocomplete="name">
+    </div>
+    <div class="campo">
+      <label for="carrito-ciudad">Ciudad (opcional)</label>
+      <input type="text" id="carrito-ciudad" maxlength="60" autocomplete="address-level2">
+    </div>
+    <p class="total">Total estimado: <strong id="carrito-total">C$ 0</strong></p>
+    <button type="button" class="btn btn-wa btn-bloque" id="carrito-enviar" disabled>
+      <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zM8.5 8.5c0 3.5 3 6.5 6.5 6.5l1.5-1.5-2-1-1 .8a4 4 0 01-2.3-2.3l.8-1-1-2z"/></svg>
+      Enviar pedido por WhatsApp
+    </button>
+    <p class="nota">Los precios y la disponibilidad se confirman por WhatsApp. No se realiza ningún pago en este sitio.</p>
+  </div>
+</aside>
+
+<main id="contenido">

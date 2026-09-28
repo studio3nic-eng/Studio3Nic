@@ -190,7 +190,52 @@ p { margin: 0; }
 .tarjeta-precio { font-weight: 800; font-size: 1.15rem; margin: 0.25rem 0 0.5rem; }
 .tarjeta-cuerpo .btn { padding-inline: 0.5rem; font-size: 0.9rem; }
 
+.tarjeta-enlace-img { display: block; }
+.tarjeta-nombre a { color: var(--tinta); text-decoration: none; }
+.tarjeta-nombre a:hover { color: var(--azul-texto); text-decoration: underline; }
+.tarjeta-incluye { font-size: 0.8rem; color: var(--texto-suave); line-height: 1.4; overflow-wrap: anywhere; }
+.etiqueta-ahorro {
+  align-self: flex-start; padding: 0.15rem 0.65rem; font-size: 0.78rem; font-weight: 700;
+  color: #0B5E28; background: #E3F8EA; border-radius: 999px;
+}
+
 .centrado { display: flex; justify-content: center; margin-top: 1.5rem; }
+
+/* ---------- Migas de pan ---------- */
+
+.migas { margin-top: 1.25rem; font-size: 0.85rem; }
+.migas ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; align-items: center; gap: 0.25rem 0.4rem; }
+.migas li { display: inline-flex; align-items: center; gap: 0.4rem; min-width: 0; color: var(--texto-suave); overflow-wrap: anywhere; }
+.migas li + li::before { content: "›"; color: var(--texto-suave); }
+.migas a { color: var(--texto-suave); display: inline-flex; align-items: center; min-height: 44px; }
+.migas a:hover { color: var(--azul-texto); }
+
+/* ---------- Página de producto ---------- */
+
+.producto-grid { display: grid; gap: 1.5rem; padding: 0.5rem 0 1rem; }
+.producto-img {
+  width: 100%; aspect-ratio: 1; object-fit: cover; background: #EEF1F6;
+  border: 1px solid var(--borde); border-radius: var(--radio);
+}
+.producto-info { display: flex; flex-direction: column; gap: 0.75rem; min-width: 0; }
+.producto-info .eyebrow a { color: inherit; text-decoration: none; }
+.producto-nombre { font-size: clamp(1.5rem, 5vw, 2.25rem); overflow-wrap: anywhere; }
+.producto-precio { font-size: 1.75rem; font-weight: 800; }
+.estado { font-weight: 700; color: #0B5E28; }
+.estado-agotado { color: #B42318; }
+.producto-desc { color: var(--texto-suave); }
+.producto-incluye { padding: 0.9rem 1rem; background: var(--tarjeta); border: 1px solid var(--borde); border-radius: 12px; }
+.producto-incluye ul { margin: 0.35rem 0 0; padding-left: 1.25rem; }
+.producto-incluye li a { display: inline-block; padding: 0.35rem 0; }
+.producto-acciones { display: grid; gap: 0.75rem; }
+.producto-confianza { margin-top: 0.5rem; }
+
+.banda-clara { margin: 2.5rem 0 0; background: var(--tarjeta); color: var(--tinta); border: 1px solid var(--borde); }
+.banda-clara h2 { color: var(--tinta); }
+.banda-clara p { color: var(--texto-suave); }
+
+a.chip { display: inline-flex; align-items: center; text-decoration: none; }
+a.chip[aria-current="page"] { background: var(--azul); border-color: var(--azul); color: #fff; }
 
 /* ---------- Chips ---------- */
 
@@ -292,13 +337,14 @@ details.pregunta p { padding: 0 1rem 1rem; color: var(--texto-suave); }
 .drawer {
   position: fixed; top: 0; right: 0; z-index: 70; width: min(100%, 26rem); height: 100vh; height: 100dvh;
   display: flex; flex-direction: column; background: var(--tarjeta);
+  overflow-y: auto; overscroll-behavior: contain;
   box-shadow: -8px 0 32px rgba(15, 17, 21, 0.2);
   transform: translateX(100%); visibility: hidden;
   transition: transform 0.25s ease, visibility 0s linear 0.25s;
 }
 .drawer.abierto { transform: translateX(0); visibility: visible; transition: transform 0.25s ease; }
 
-.drawer-cab { display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid var(--borde); }
+.drawer-cab { position: sticky; top: 0; z-index: 1; background: var(--tarjeta); display: flex; align-items: center; justify-content: space-between; padding: 0.75rem 1rem; border-bottom: 1px solid var(--borde); }
 .drawer-cab h2 { font-size: 1.35rem; }
 .cerrar {
   width: 44px; height: 44px; font-size: 1.75rem; line-height: 1; color: var(--tinta);
@@ -306,7 +352,8 @@ details.pregunta p { padding: 0 1rem 1rem; color: var(--texto-suave); }
 }
 .cerrar:hover { background: var(--borde); }
 
-.drawer-cuerpo { flex: 1; overflow-y: auto; padding: 0.5rem 1rem; }
+/* Todo el cajón se desplaza como una sola columna: en teléfonos las líneas y sugerencias no quedan apretadas. */
+.drawer-cuerpo { flex: 1 0 auto; padding: 0.5rem 1rem; }
 .vacio { padding: 2rem 0; text-align: center; color: var(--texto-suave); }
 .vacio[hidden] { display: none; }
 .lineas { list-style: none; margin: 0; padding: 0; }
@@ -325,7 +372,21 @@ details.pregunta p { padding: 0 1rem 1rem; color: var(--texto-suave); }
   color: var(--azul-texto); background: none; border: 0; text-decoration: underline; cursor: pointer;
 }
 
-.drawer-pie { padding: 1rem; display: grid; gap: 0.75rem; border-top: 1px solid var(--borde); background: var(--tarjeta); max-height: 60vh; overflow-y: auto; }
+.complementa { margin: 1rem 0 0.5rem; padding: 0.75rem; background: var(--fondo); border-radius: 12px; }
+.complementa[hidden] { display: none; }
+.complementa h3 { font-size: 0.95rem; margin-bottom: 0.25rem; }
+.sugerencias { list-style: none; margin: 0; padding: 0; }
+.sugerencia { display: flex; align-items: center; gap: 0.5rem; padding: 0.35rem 0; }
+.sugerencia + .sugerencia { border-top: 1px solid var(--borde); }
+.sugerencia-nombre { flex: 1; min-width: 0; font-size: 0.85rem; font-weight: 500; line-height: 1.35; overflow-wrap: anywhere; }
+.sugerencia-precio { font-size: 0.85rem; font-weight: 700; white-space: nowrap; }
+.sugerencia-btn { padding: 0 0.9rem; font-size: 0.85rem; }
+
+.envio-aviso { margin: 0; padding: 0.5rem 0.75rem; font-size: 0.85rem; line-height: 1.4; background: #EAF2FF; border-radius: 10px; }
+.envio-aviso.logrado { background: #E3F8EA; color: #0B5E28; font-weight: 500; }
+.envio-aviso[hidden] { display: none; }
+
+.drawer-pie { padding: 1rem; display: grid; gap: 0.75rem; border-top: 1px solid var(--borde); background: var(--tarjeta); }
 .drawer-pie .campo label { font-size: 0.85rem; }
 .total { font-size: 1.1rem; }
 .total strong { font-weight: 800; }
@@ -372,7 +433,8 @@ details.pregunta p { padding: 0 1rem 1rem; color: var(--texto-suave); }
   .pasos { grid-template-columns: repeat(3, 1fr); }
   .confianza { grid-template-columns: repeat(2, 1fr); }
   .cajas { grid-template-columns: repeat(2, 1fr); }
-  .pie-grid { grid-template-columns: 2fr 1fr 1fr; }
+  .pie-grid { grid-template-columns: 2fr 1fr 1fr 1fr; }
+  .producto-acciones { max-width: 26rem; }
   .banda { flex-direction: row; align-items: center; justify-content: space-between; padding: 2.5rem; }
   .checks { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
@@ -390,6 +452,7 @@ details.pregunta p { padding: 0 1rem 1rem; color: var(--texto-suave); }
   .cat-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); }
   .grilla-productos { grid-template-columns: repeat(4, minmax(0, 1fr)); }
   .cajas.cuatro { grid-template-columns: repeat(4, 1fr); }
+  .producto-grid { grid-template-columns: 1fr 1fr; gap: 3rem; align-items: start; padding-top: 1rem; }
   .botones .btn { flex: 0 1 auto; }
 }
 

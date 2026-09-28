@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<title>[PRUEBA] Smartwatch con monitor de ritmo cardíaco – C$ 1,450 | Studio 3</title>
+<meta name="description" content="[PRUEBA] Smartwatch con monitor de ritmo cardíaco. Descripción de prueba. Escribe aquí las características reales. Precio: C$ 1,450. Entrega gratis en Masaya y…">
+<link rel="canonical" href="https://studio3nic-eng.github.io/Studio3Nic/producto/demo-sw-1.html">
+<meta property="product:price:amount" content="1450">
+<meta property="product:price:currency" content="NIO">
+<meta name="theme-color" content="#1F6FEB">
+<meta property="og:type" content="product">
+<meta property="og:site_name" content="Studio 3">
+<meta property="og:locale" content="es_NI">
+<meta property="og:title" content="[PRUEBA] Smartwatch con monitor de ritmo cardíaco – C$ 1,450 | Studio 3">
+<meta property="og:description" content="[PRUEBA] Smartwatch con monitor de ritmo cardíaco. Descripción de prueba. Escribe aquí las características reales. Precio: C$ 1,450. Entrega gratis en Masaya y…">
+<meta property="og:url" content="https://studio3nic-eng.github.io/Studio3Nic/producto/demo-sw-1.html">
+<meta property="og:image" content="https://studio3nic-eng.github.io/Studio3Nic/img/compartir.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="../img/favicon.svg">
+<link rel="stylesheet" href="../css/estilos.css">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Product","name":"[PRUEBA] Smartwatch con monitor de ritmo cardíaco","description":"Descripción de prueba. Escribe aquí las características reales.","sku":"demo-sw-1","image":["https://studio3nic-eng.github.io/Studio3Nic/img/productos/placeholder.svg"],"category":"Smartwatches","offers":{"@type":"Offer","url":"https://studio3nic-eng.github.io/Studio3Nic/producto/demo-sw-1.html","priceCurrency":"NIO","price":"1450","availability":"https://schema.org/InStock","itemCondition":"https://schema.org/NewCondition","seller":{"@type":"Organization","name":"Studio 3"}}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"Inicio","item":"https://studio3nic-eng.github.io/Studio3Nic/"},{"@type":"ListItem","position":2,"name":"Smartwatches","item":"https://studio3nic-eng.github.io/Studio3Nic/categoria/smartwatches.html"},{"@type":"ListItem","position":3,"name":"[PRUEBA] Smartwatch con monitor de ritmo cardíaco","item":"https://studio3nic-eng.github.io/Studio3Nic/producto/demo-sw-1.html"}]}</script>
+</head>
+<body data-base="../">
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera">
+  <div class="contenedor cabecera-fila">
+    <a class="marca" href="../index.html" aria-label="Studio 3, ir al inicio"><span class="marca-texto">STUDIO<sup>3</sup></span></a>
+    <nav class="nav" id="nav-principal" aria-label="Principal">
+      <a href="../index.html">Inicio</a>
+      <a href="../tienda.html">Tienda</a>
+      <a href="../revendedores.html">¿Quieres emprender?</a>
+      <a href="../ayuda.html">Ayuda</a>
+    </nav>
+    <div class="cabecera-acciones">
+      <button type="button" class="btn-menu" id="btn-menu" aria-expanded="false" aria-controls="nav-principal">Menú</button>
+      <button type="button" class="btn-carrito" id="btn-carrito" aria-label="Abrir carrito">
+        <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l1 13H5zM9 7a3 3 0 016 0"/></svg>
+        <span class="contador" id="contador" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="carrito" role="dialog" aria-modal="true" aria-labelledby="carrito-titulo" aria-hidden="true">
+  <div class="drawer-cab">
+    <h2 id="carrito-titulo">Tu carrito</h2>
+    <button type="button" class="cerrar" id="cerrar-carrito" aria-label="Cerrar carrito">×</button>
+  </div>
+  <div class="drawer-cuerpo">
+    <p class="vacio" id="carrito-vacio">Tu carrito está vacío. ¡Explora la tienda!</p>
+    <ul class="lineas" id="carrito-lineas"></ul>
+    <div class="complementa" id="carrito-complementa" hidden>
+      <h3>Complementa tu compra</h3>
+      <ul class="sugerencias" id="carrito-sugerencias"></ul>
+    </div>
+  </div>
+  <div class="drawer-pie">
+    <div class="campo">
+      <label for="carrito-entrega">Entrega</label>
+      <select id="carrito-entrega">
+        <option value="masaya">Masaya: entrega gratis</option>
+        <option value="otro">Otro departamento: envío por CargoTrans</option>
+      </select>
+    </div>
+    <p class="envio-aviso" id="carrito-envio" hidden></p>
+    <div class="campo">
+      <label for="carrito-nombre">Nombre (opcional)</label>
+      <input type="text" id="carrito-nombre" maxlength="60" autocomplete="name">
+    </div>
+    <div class="campo">
+      <label for="carrito-ciudad">Ciudad (opcional)</label>
+      <input type="text" id="carrito-ciudad" maxlength="60" autocomplete="address-level2">
+    </div>
+    <p class="total">Total estimado: <strong id="carrito-total">C$ 0</strong></p>
+    <button type="button" class="btn btn-wa btn-bloque" id="carrito-enviar" disabled>
+      <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zM8.5 8.5c0 3.5 3 6.5 6.5 6.5l1.5-1.5-2-1-1 .8a4 4 0 01-2.3-2.3l.8-1-1-2z"/></svg>
+      Enviar pedido por WhatsApp
+    </button>
+    <p class="nota">Los precios y la disponibilidad se confirman por WhatsApp. No se realiza ningún pago en este sitio.</p>
+  </div>
+</aside>
+
+<main id="contenido">
+<div class="contenedor">
+  <nav class="migas" aria-label="Ruta">
+    <ol>
+      <li><a href="../index.html">Inicio</a></li>
+      <li><a href="../categoria/smartwatches.html">Smartwatches</a></li>
+      <li><span aria-current="page">[PRUEBA] Smartwatch con monitor de ritmo cardíaco</span></li>
+    </ol>
+  </nav>
+  <div class="producto-grid">
+    <img class="producto-img" src="../img/productos/placeholder.svg" width="800" height="800" alt="[PRUEBA] Smartwatch con monitor de ritmo cardíaco">
+    <div class="producto-info">
+      <p class="eyebrow"><a href="../categoria/smartwatches.html">Smartwatches</a></p>
+      <h1 class="producto-nombre">[PRUEBA] Smartwatch con monitor de ritmo cardíaco</h1>
+      <p class="producto-precio" data-precio="demo-sw-1">C$ 1,450</p>
+      <p class="estado" data-estado="demo-sw-1">Disponible</p>
+      <p class="producto-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+      <div class="producto-acciones">
+        <button type="button" class="btn btn-primario" data-agregar="demo-sw-1">Agregar al carrito</button>
+        <a class="btn btn-secundario" href="https://wa.me/50587146561?text=Hola%20Studio%203%2C%20me%20interesa%20este%20producto%3A%20%5BPRUEBA%5D%20Smartwatch%20con%20monitor%20de%20ritmo%20card%C3%ADaco%0Ahttps%3A%2F%2Fstudio3nic-eng.github.io%2FStudio3Nic%2Fproducto%2Fdemo-sw-1.html" target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a>
+      </div>
+      <ul class="lista-check producto-confianza">
+        <li>Entrega gratis en Masaya</li>
+        <li>Envíos a todo Nicaragua por CargoTrans</li>
+        <li>Garantía en todos los productos</li>
+      </ul>
+    </div>
+  </div>
+  <section class="seccion" aria-labelledby="t-relacionados">
+    <div class="seccion-cab"><h2 id="t-relacionados">También te puede interesar</h2></div>
+    <div class="grilla-productos" data-lista="relacionados:demo-sw-1">
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="../producto/demo-sw-2.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="../img/productos/placeholder.svg" alt="[PRUEBA] Smartwatch deportivo resistente al agua" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="../producto/demo-sw-2.html">[PRUEBA] Smartwatch deportivo resistente al agua</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 1,900</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-sw-2">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="../producto/demo-pb-1.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="../img/productos/placeholder.svg" alt="[PRUEBA] Power Bank 10,000 mAh carga rápida 20W" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="../producto/demo-pb-1.html">[PRUEBA] Power Bank 10,000 mAh carga rápida 20W</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 650</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-pb-1">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="../producto/demo-pb-2.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="../img/productos/placeholder.svg" alt="[PRUEBA] Power Bank 20,000 mAh con pantalla digital" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="../producto/demo-pb-2.html">[PRUEBA] Power Bank 20,000 mAh con pantalla digital</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 900</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-pb-2">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="../producto/demo-pa-1.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="../img/productos/placeholder.svg" alt="[PRUEBA] Parlante Bluetooth portátil resistente al agua" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="../producto/demo-pa-1.html">[PRUEBA] Parlante Bluetooth portátil resistente al agua</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 800</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-pa-1">Agregar al carrito</button>
+  </div>
+</article>
+    </div>
+  </section>
+</div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie-grid">
+      <div>
+        <p class="marca-texto">STUDIO<sup>3</sup></p>
+        <p class="suave">Masaya, Nicaragua</p>
+        <p><a href="https://wa.me/50587146561" data-wa target="_blank" rel="noopener noreferrer">WhatsApp +505 8714-6561</a></p>
+        <div class="pie-redes">
+          <a href="https://www.instagram.com/studio3.ni" data-red="instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Studio 3">
+            <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@studio3.ni" data-red="tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Studio 3">
+            <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 11-3.5-3.5M14 3c.3 2.5 2 4.2 5 4.5"/></svg>
+          </a>
+          <a href="PEGAR-AQUI-EL-ENLACE-DE-FACEBOOK" data-red="facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Studio 3">
+            <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h-2.5A3.5 3.5 0 009 6.5V9H6v4h3v8h4v-8h3l1-4h-4V6.5c0-.3.2-.5.5-.5H15z"/></svg>
+          </a>
+        </div>
+      </div>
+      <nav aria-label="Categorías">
+        <h2>Categorías</h2>
+        <ul>
+          <li><a href="../categoria/power-banks.html">Power Banks</a></li>
+          <li><a href="../categoria/parlantes.html">Parlantes</a></li>
+          <li><a href="../categoria/cargadores.html">Cargadores</a></li>
+          <li><a href="../categoria/audifonos.html">Audífonos</a></li>
+          <li><a href="../categoria/smartwatches.html">Smartwatches</a></li>
+          <li><a href="../categoria/cables.html">Cables</a></li>
+          <li><a href="../categoria/combos.html">Combos</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Páginas">
+        <h2>Páginas</h2>
+        <ul>
+          <li><a href="../index.html">Inicio</a></li>
+          <li><a href="../tienda.html">Tienda</a></li>
+          <li><a href="../revendedores.html">¿Quieres emprender?</a></li>
+          <li><a href="../ayuda.html">Ayuda</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Ayuda">
+        <h2>Ayuda</h2>
+        <ul>
+          <li><a href="../ayuda.html#envios">Envíos</a></li>
+          <li><a href="../ayuda.html#garantia">Garantía</a></li>
+          <li><a href="../ayuda.html#privacidad">Privacidad</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="copy">© 2026 Studio 3</p>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/50587146561" data-wa target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
+  <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zM8.5 8.5c0 3.5 3 6.5 6.5 6.5l1.5-1.5-2-1-1 .8a4 4 0 01-2.3-2.3l.8-1-1-2z"/></svg>
+</a>
+
+<script src="../js/config.js" defer></script>
+<script src="../js/productos.js" defer></script>
+<script src="../js/app.js" defer></script>
+</body>
+</html>

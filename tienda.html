@@ -3,16 +3,17 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Tienda | Studio 3</title>
-<meta name="description" content="Catálogo de Studio 3: power banks, parlantes, cargadores, audífonos, smartwatches y cables. Arma tu carrito y envía el pedido por WhatsApp.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Tienda | Studio 3</title>
+<meta name="description" content="Catálogo de Studio 3: power banks, parlantes, cargadores, audífonos, smartwatches, cables y combos. Arma tu carrito y envía el pedido por WhatsApp.">
+<link rel="canonical" href="https://studio3nic-eng.github.io/Studio3Nic/tienda.html">
 <meta name="theme-color" content="#1F6FEB">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Studio 3">
 <meta property="og:locale" content="es_NI">
 <meta property="og:title" content="Tienda | Studio 3">
-<meta property="og:description" content="Catálogo de Studio 3: power banks, parlantes, cargadores, audífonos, smartwatches y cables. Arma tu carrito y envía el pedido por WhatsApp.">
+<meta property="og:description" content="Catálogo de Studio 3: power banks, parlantes, cargadores, audífonos, smartwatches, cables y combos. Arma tu carrito y envía el pedido por WhatsApp.">
 <meta property="og:url" content="https://studio3nic-eng.github.io/Studio3Nic/tienda.html">
 <meta property="og:image" content="https://studio3nic-eng.github.io/Studio3Nic/img/compartir.jpg">
 <meta property="og:image:width" content="1200">
@@ -21,7 +22,7 @@
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+<body data-base="">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <header class="cabecera">
   <div class="contenedor cabecera-fila">
@@ -51,6 +52,10 @@
   <div class="drawer-cuerpo">
     <p class="vacio" id="carrito-vacio">Tu carrito está vacío. ¡Explora la tienda!</p>
     <ul class="lineas" id="carrito-lineas"></ul>
+    <div class="complementa" id="carrito-complementa" hidden>
+      <h3>Complementa tu compra</h3>
+      <ul class="sugerencias" id="carrito-sugerencias"></ul>
+    </div>
   </div>
   <div class="drawer-pie">
     <div class="campo">
@@ -60,6 +65,7 @@
         <option value="otro">Otro departamento: envío por CargoTrans</option>
       </select>
     </div>
+    <p class="envio-aviso" id="carrito-envio" hidden></p>
     <div class="campo">
       <label for="carrito-nombre">Nombre (opcional)</label>
       <input type="text" id="carrito-nombre" maxlength="60" autocomplete="name">
@@ -86,7 +92,138 @@
   </div>
   <div class="chips" id="chips" role="group" aria-label="Filtrar por categoría"></div>
   <p class="conteo" id="conteo" aria-live="polite"></p>
-  <div class="grilla-productos" id="productos"></div>
+  <div class="grilla-productos" id="productos">
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-pb-1.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Power Bank 10,000 mAh carga rápida 20W" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-pb-1.html">[PRUEBA] Power Bank 10,000 mAh carga rápida 20W</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 650</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-pb-1">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-pb-2.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Power Bank 20,000 mAh con pantalla digital" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-pb-2.html">[PRUEBA] Power Bank 20,000 mAh con pantalla digital</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 900</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-pb-2">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-pa-1.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Parlante Bluetooth portátil resistente al agua" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-pa-1.html">[PRUEBA] Parlante Bluetooth portátil resistente al agua</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 800</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-pa-1">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-pa-2.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Parlante Bluetooth con luces LED" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-pa-2.html">[PRUEBA] Parlante Bluetooth con luces LED</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 1,200</p>
+    <button type="button" class="btn btn-primario btn-bloque" disabled>Agotado</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-ca-1.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Cargador de pared USB-C 20W" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-ca-1.html">[PRUEBA] Cargador de pared USB-C 20W</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 350</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-ca-1">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-ca-2.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Cargador para carro de doble puerto" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-ca-2.html">[PRUEBA] Cargador para carro de doble puerto</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 500</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-ca-2">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-au-1.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Audífonos inalámbricos con estuche de carga" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-au-1.html">[PRUEBA] Audífonos inalámbricos con estuche de carga</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 750</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-au-1">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-au-2.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Audífonos de diadema Bluetooth" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-au-2.html">[PRUEBA] Audífonos de diadema Bluetooth</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 1,100</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-au-2">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-sw-1.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Smartwatch con monitor de ritmo cardíaco" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-sw-1.html">[PRUEBA] Smartwatch con monitor de ritmo cardíaco</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 1,450</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-sw-1">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-sw-2.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Smartwatch deportivo resistente al agua" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-sw-2.html">[PRUEBA] Smartwatch deportivo resistente al agua</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 1,900</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-sw-2">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-cb-1.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Cable USB-C a USB-C 1 m" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-cb-1.html">[PRUEBA] Cable USB-C a USB-C 1 m</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 150</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-cb-1">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/demo-cb-2.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Cable USB-A a USB-C 2 m" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/demo-cb-2.html">[PRUEBA] Cable USB-A a USB-C 2 m</a></h3>
+    <p class="tarjeta-desc">Descripción de prueba. Escribe aquí las características reales.</p>
+    <p class="tarjeta-precio">C$ 200</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="demo-cb-2">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/combo-prueba-viaje.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Combo viaje: power bank + cable" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/combo-prueba-viaje.html">[PRUEBA] Combo viaje: power bank + cable</a></h3>
+    <p class="tarjeta-incluye">Incluye: [PRUEBA] Power Bank 10,000 mAh carga rápida 20W + [PRUEBA] Cable USB-C a USB-C 1 m</p>
+    <p class="etiqueta-ahorro">Ahorras C$ 80</p>
+    <p class="tarjeta-desc">Combo de prueba. Define aquí el combo real y su precio.</p>
+    <p class="tarjeta-precio">C$ 720</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="combo-prueba-viaje">Agregar al carrito</button>
+  </div>
+</article>
+<article class="tarjeta-producto">
+  <a class="tarjeta-enlace-img" href="producto/combo-prueba-audio.html" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="img/productos/placeholder.svg" alt="[PRUEBA] Combo audio: audífonos + power bank" width="400" height="400" loading="lazy" decoding="async"></a>
+  <div class="tarjeta-cuerpo">
+    <h3 class="tarjeta-nombre"><a href="producto/combo-prueba-audio.html">[PRUEBA] Combo audio: audífonos + power bank</a></h3>
+    <p class="tarjeta-incluye">Incluye: [PRUEBA] Audífonos inalámbricos con estuche de carga + [PRUEBA] Power Bank 10,000 mAh carga rápida 20W</p>
+    <p class="etiqueta-ahorro">Ahorras C$ 100</p>
+    <p class="tarjeta-desc">Combo de prueba. Define aquí el combo real y su precio.</p>
+    <p class="tarjeta-precio">C$ 1,300</p>
+    <button type="button" class="btn btn-primario btn-bloque" data-agregar="combo-prueba-audio">Agregar al carrito</button>
+  </div>
+</article>
+  </div>
 </div>
 </main>
 
@@ -109,6 +246,18 @@
           </a>
         </div>
       </div>
+      <nav aria-label="Categorías">
+        <h2>Categorías</h2>
+        <ul>
+          <li><a href="categoria/power-banks.html">Power Banks</a></li>
+          <li><a href="categoria/parlantes.html">Parlantes</a></li>
+          <li><a href="categoria/cargadores.html">Cargadores</a></li>
+          <li><a href="categoria/audifonos.html">Audífonos</a></li>
+          <li><a href="categoria/smartwatches.html">Smartwatches</a></li>
+          <li><a href="categoria/cables.html">Cables</a></li>
+          <li><a href="categoria/combos.html">Combos</a></li>
+        </ul>
+      </nav>
       <nav aria-label="Páginas">
         <h2>Páginas</h2>
         <ul>

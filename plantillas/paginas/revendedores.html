@@ -1,0 +1,102 @@
+titulo: ¿Quieres emprender? | Studio 3
+descripcion: Emprende vendiendo accesorios de tecnología con Studio 3. Precios por volumen, prioridad en inventario y fotos para tus redes. Aplica por WhatsApp.
+activo: emprender
+script: js/revendedores.js
+---
+<div class="contenedor">
+  <div class="pagina-cab">
+    <p class="eyebrow">Ventas al por mayor</p>
+    <h1>Emprende con Studio 3</h1>
+    <p>Precios especiales por volumen para tiendas y vendedores en redes sociales.</p>
+  </div>
+</div>
+
+<section class="seccion" aria-labelledby="t-beneficios">
+  <div class="contenedor">
+    <div class="seccion-cab"><h2 id="t-beneficios">Beneficios</h2></div>
+    <div class="cajas cuatro">
+      <div class="caja"><h3>Precios por volumen</h3><p>Mientras más pides, mejor precio.</p></div>
+      <div class="caja"><h3>Prioridad en inventario</h3><p>Te apartamos producto cuando hay poca existencia.</p></div>
+      <div class="caja"><h3>Fotos para tus redes</h3><p>Te compartimos fotos de los productos para que los publiques.</p></div>
+      <div class="caja"><h3>Misma garantía</h3><p>Tus clientes tienen la misma garantía que en tienda.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="seccion seccion-blanca" aria-labelledby="t-funciona">
+  <div class="contenedor">
+    <div class="seccion-cab"><h2 id="t-funciona">Cómo funciona</h2></div>
+    <ol class="pasos">
+      <li>Aplica con el formulario de abajo.</li>
+      <li>Revisamos tu solicitud y te enviamos la lista de precios por WhatsApp.</li>
+      <li>Haces tu primer pedido.</li>
+    </ol>
+  </div>
+</section>
+
+<section class="seccion" aria-labelledby="t-requisitos">
+  <div class="contenedor prosa">
+    <h2 id="t-requisitos">Requisitos</h2>
+    <ul class="lista-check">
+      <li>Pedido mínimo inicial.</li>
+    </ul>
+    <!-- TODO: definir el monto o número de unidades del pedido mínimo inicial y otros requisitos. -->
+    <p class="pendiente">TODO: escribir aquí el pedido mínimo inicial (monto o unidades) y otros requisitos.</p>
+  </div>
+</section>
+
+<section class="seccion seccion-blanca" aria-labelledby="t-aplicar">
+  <div class="contenedor">
+    <div class="seccion-cab">
+      <h2 id="t-aplicar">Quiero ser emprendedor</h2>
+      <p>Los campos con <span class="req">*</span> son obligatorios. Al enviar se abre WhatsApp con tu solicitud.</p>
+    </div>
+    <form class="formulario" id="form-revendedor">
+      <div class="campo">
+        <label for="f-nombre">Nombre completo <span class="req">*</span></label>
+        <input type="text" id="f-nombre" name="nombre" maxlength="60" required pattern=".*\S.*" title="Escribe tu nombre completo." autocomplete="name">
+      </div>
+      <div class="campo">
+        <label for="f-negocio">Nombre del negocio</label>
+        <input type="text" id="f-negocio" name="negocio" maxlength="60" autocomplete="organization">
+      </div>
+      <div class="campo">
+        <label for="f-ciudad">Ciudad o departamento <span class="req">*</span></label>
+        <input type="text" id="f-ciudad" name="ciudad" maxlength="60" required pattern=".*\S.*" title="Escribe tu ciudad o departamento." autocomplete="address-level2">
+      </div>
+      <div class="campo">
+        <label for="f-canal">Canal de venta</label>
+        <select id="f-canal" name="canal">
+          <option value="">Elige una opción</option>
+          <option value="Tienda física">Tienda física</option>
+          <option value="Redes sociales">Redes sociales</option>
+          <option value="Ambos">Ambos</option>
+        </select>
+      </div>
+      <fieldset class="campo">
+        <legend>Productos de interés</legend>
+        <div class="checks">
+          <label class="check"><input type="checkbox" name="interes" value="power-banks"> Power Banks</label>
+          <label class="check"><input type="checkbox" name="interes" value="parlantes"> Parlantes</label>
+          <label class="check"><input type="checkbox" name="interes" value="cargadores"> Cargadores</label>
+          <label class="check"><input type="checkbox" name="interes" value="audifonos"> Audífonos</label>
+          <label class="check"><input type="checkbox" name="interes" value="smartwatches"> Smartwatches</label>
+          <label class="check"><input type="checkbox" name="interes" value="cables"> Cables</label>
+        </div>
+      </fieldset>
+      <div class="campo">
+        <label for="f-volumen">Volumen mensual estimado</label>
+        <select id="f-volumen" name="volumen">
+          <option value="">Elige una opción</option>
+          <option value="10–24 unidades">10–24 unidades</option>
+          <option value="25–49 unidades">25–49 unidades</option>
+          <option value="50 o más unidades">50 o más unidades</option>
+        </select>
+      </div>
+      <button type="submit" class="btn btn-wa btn-bloque">
+        <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zM8.5 8.5c0 3.5 3 6.5 6.5 6.5l1.5-1.5-2-1-1 .8a4 4 0 01-2.3-2.3l.8-1-1-2z"/></svg>
+        Enviar solicitud por WhatsApp
+      </button>
+    </form>
+  </div>
+</section>

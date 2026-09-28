@@ -1,4 +1,4 @@
-# Servidor local de prueba (solo para tu computadora; no se usa en Cloudflare).
+﻿# Servidor local de prueba (solo para tu computadora; no se usa en Cloudflare).
 # Uso:  powershell -ExecutionPolicy Bypass -File .\preview.ps1   ->  http://localhost:3000
 #       (o doble clic en preview.cmd). Otro puerto: .\preview.ps1 -Puerto 8080
 # No necesita instalar nada. Aplica los encabezados del bloque /* de _headers para que
@@ -7,6 +7,17 @@ param([int]$Puerto = 3000, [switch]$NoAbrir)
 
 $ErrorActionPreference = "Stop"
 $raiz = [IO.Path]::GetFullPath($PSScriptRoot).TrimEnd("\") + "\"
+
+# Regenera las páginas primero, para que siempre veas lo último de js/productos.js y plantillas/.
+Write-Host "Generando páginas..."
+$global:LASTEXITCODE = 0
+try {
+  & (Join-Path $raiz "generar.ps1")
+} catch {
+  Write-Host "Error al generar las páginas: $($_.Exception.Message)" -ForegroundColor Red
+  exit 1
+}
+if ($LASTEXITCODE -ne 0) { exit 1 }
 $tipos = @{
   ".html" = "text/html; charset=utf-8"; ".css" = "text/css; charset=utf-8"
   ".js" = "text/javascript; charset=utf-8"; ".svg" = "image/svg+xml"
@@ -54,6 +65,11 @@ try {
       $archivo = [IO.Path]::GetFullPath((Join-Path $raiz $ruta))
       $estado = 200
 
+      # En GitHub Pages el sitio vive en /Studio3Nic/…; aquí se acepta esa ruta quitando la primera carpeta.
+      if (-not (Test-Path -LiteralPath $archivo -PathType Leaf) -and $ruta.Contains("/")) {
+        $sinPrefijo = [IO.Path]::GetFullPath((Join-Path $raiz ($ruta.Substring($ruta.IndexOf("/") + 1))))
+        if (Test-Path -LiteralPath $sinPrefijo -PathType Leaf) { $archivo = $sinPrefijo }
+      }
       $dentroDeRaiz = $archivo.StartsWith($raiz, [StringComparison]::OrdinalIgnoreCase)
       if (-not $dentroDeRaiz -or -not (Test-Path -LiteralPath $archivo -PathType Leaf)) {
         $estado = 404

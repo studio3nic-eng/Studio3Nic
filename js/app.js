@@ -1,9 +1,12 @@
-// Código compartido por todas las páginas: formato, carrito, tarjetas, cajón del carrito, menú y pedido.
+// Código compartido por todas las páginas: formato, carrito, tarjetas, cajón del carrito, menú, origen y pedido.
 (function () {
   "use strict";
 
   const CLAVE_CARRITO = "studio3-carrito";
-  const SVG_NS = "http://www.w3.org/2000/svg";
+  const CLAVE_ORIGEN = "studio3-origen";
+  const DIAS_ORIGEN = 30;
+  // Prefijo de rutas: "" en la raíz, "../" en categoria/ y producto/ (lo pone generar.ps1 en <body data-base>).
+  const BASE = document.body.dataset.base || "";
 
   // ---------- Utilidades ----------
 
@@ -27,6 +30,10 @@
     return nodo;
   }
 
+  function tieneClave(obj, clave) {
+    return Object.prototype.hasOwnProperty.call(obj, clave);
+  }
+
   function productoPorId(id) {
     return PRODUCTOS.find(function (p) { return p.id === id; }) || null;
   }
@@ -35,9 +42,48 @@
     return CATEGORIAS.some(function (c) { return c.id === id; });
   }
 
+  function urlProducto(id) {
+    return BASE + "producto/" + encodeURIComponent(id) + ".html";
+  }
+
   function abrirWhatsApp(texto) {
     const url = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(texto);
     window.open(url, "_blank", "noopener");
+  }
+
+  // ---------- Origen del visitante (?ref=ig) ----------
+  // Solo se guarda la clave de la lista CONFIG.fuentes, nunca el texto del enlace.
+
+  function guardarOrigen() {
+    const ref = new URLSearchParams(window.location.search).get("ref");
+    if (ref === null || !tieneClave(CONFIG.fuentes, ref)) return;
+    try {
+      localStorage.setItem(CLAVE_ORIGEN, JSON.stringify({ ref: ref, t: Date.now() }));
+    } catch (e) { /* almacenamiento bloqueado */ }
+  }
+
+  function origen() {
+    try {
+      const o = JSON.parse(localStorage.getItem(CLAVE_ORIGEN));
+      if (o && typeof o.ref === "string" && tieneClave(CONFIG.fuentes, o.ref) &&
+          Date.now() - Number(o.t) < DIAS_ORIGEN * 86400000) {
+        return CONFIG.fuentes[o.ref];
+      }
+    } catch (e) { /* dato roto o almacenamiento bloqueado */ }
+    return "";
+  }
+
+  // ---------- Combos ----------
+
+  function incluidos(p) {
+    return (Array.isArray(p.incluye) ? p.incluye : []).map(productoPorId).filter(Boolean);
+  }
+
+  function ahorro(p) {
+    const partes = incluidos(p);
+    if (partes.length === 0) return 0;
+    const suma = partes.reduce(function (s, x) { return s + x.precio; }, 0);
+    return Math.max(0, suma - p.precio);
   }
 
   // ---------- Carrito (localStorage: solo {id, cant}) ----------
@@ -111,20 +157,52 @@
 
   // ---------- Tarjeta de producto ----------
 
+  function conectarBotonAgregar(boton, p) {
+    let temporizador = null;
+    boton.addEventListener("click", function () {
+      Carrito.agregar(p.id);
+      notificarCambio();
+      boton.textContent = "Agregado";
+      clearTimeout(temporizador);
+      temporizador = setTimeout(function () {
+        boton.textContent = "Agregar al carrito";
+      }, 1500);
+    });
+  }
+
   function tarjetaProducto(p) {
     const tarjeta = el("article", "tarjeta-producto");
+    const url = urlProducto(p.id);
 
+    const enlaceImg = el("a", "tarjeta-enlace-img");
+    enlaceImg.href = url;
+    enlaceImg.tabIndex = -1;
+    enlaceImg.setAttribute("aria-hidden", "true");
     const img = el("img", "tarjeta-img");
-    img.src = p.imagen;
+    img.src = BASE + p.imagen;
     img.alt = p.nombre;
     img.width = 400;
     img.height = 400;
     img.loading = "lazy";
     img.decoding = "async";
-    tarjeta.appendChild(img);
+    enlaceImg.appendChild(img);
+    tarjeta.appendChild(enlaceImg);
 
     const cuerpo = el("div", "tarjeta-cuerpo");
-    cuerpo.appendChild(el("h3", "tarjeta-nombre", p.nombre));
+    const titulo = el("h3", "tarjeta-nombre");
+    const enlace = el("a", "", p.nombre);
+    enlace.href = url;
+    titulo.appendChild(enlace);
+    cuerpo.appendChild(titulo);
+
+    const partes = incluidos(p);
+    if (partes.length) {
+      cuerpo.appendChild(el("p", "tarjeta-incluye",
+        "Incluye: " + partes.map(function (x) { return x.nombre; }).join(" + ")));
+      const a = ahorro(p);
+      if (a > 0) cuerpo.appendChild(el("p", "etiqueta-ahorro", "Ahorras " + formatoPrecio(a)));
+    }
+
     cuerpo.appendChild(el("p", "tarjeta-desc", p.descripcion));
     cuerpo.appendChild(el("p", "tarjeta-precio", formatoPrecio(p.precio)));
 
@@ -132,16 +210,7 @@
     boton.type = "button";
     if (p.disponible) {
       boton.textContent = "Agregar al carrito";
-      let temporizador = null;
-      boton.addEventListener("click", function () {
-        Carrito.agregar(p.id);
-        notificarCambio();
-        boton.textContent = "Agregado";
-        clearTimeout(temporizador);
-        temporizador = setTimeout(function () {
-          boton.textContent = "Agregar al carrito";
-        }, 1500);
-      });
+      conectarBotonAgregar(boton, p);
     } else {
       boton.textContent = "Agotado";
       boton.disabled = true;
@@ -149,6 +218,62 @@
     cuerpo.appendChild(boton);
     tarjeta.appendChild(cuerpo);
     return tarjeta;
+  }
+
+  // Las listas se vuelven a dibujar desde productos.js para que precios y existencias
+  // estén siempre al día aunque no se haya ejecutado generar.ps1.
+  function listaProductos(tipo, id) {
+    if (tipo === "destacados") {
+      return PRODUCTOS.filter(function (p) { return p.destacado; }).slice(0, 8);
+    }
+    if (tipo === "categoria") {
+      return PRODUCTOS.filter(function (p) { return p.categoria === id; });
+    }
+    if (tipo === "relacionados") {
+      const base = productoPorId(id);
+      const lista = PRODUCTOS.filter(function (p) {
+        return base && p.categoria === base.categoria && p.id !== id;
+      });
+      PRODUCTOS.forEach(function (p) {
+        if (p.destacado && p.id !== id && lista.indexOf(p) === -1) lista.push(p);
+      });
+      return lista.slice(0, 4);
+    }
+    return [];
+  }
+
+  function iniciarListas() {
+    document.querySelectorAll("[data-lista]").forEach(function (cont) {
+      const partes = cont.dataset.lista.split(":");
+      const lista = listaProductos(partes[0], partes[1]);
+      cont.replaceChildren();
+      lista.forEach(function (p) { cont.appendChild(tarjetaProducto(p)); });
+    });
+  }
+
+  // Página de un producto: precio, estado y botón se actualizan desde productos.js.
+  function iniciarFicha() {
+    document.querySelectorAll("[data-precio]").forEach(function (n) {
+      const p = productoPorId(n.dataset.precio);
+      if (p) n.textContent = formatoPrecio(p.precio);
+    });
+    document.querySelectorAll("[data-estado]").forEach(function (n) {
+      const p = productoPorId(n.dataset.estado);
+      const disponible = Boolean(p && p.disponible);
+      n.textContent = disponible ? "Disponible" : "Agotado";
+      n.classList.toggle("estado-agotado", !disponible);
+    });
+    document.querySelectorAll("button[data-agregar]").forEach(function (b) {
+      const p = productoPorId(b.dataset.agregar);
+      if (!p || !p.disponible) {
+        b.disabled = true;
+        b.textContent = p ? "Agotado" : "No disponible";
+        return;
+      }
+      b.disabled = false;
+      b.textContent = "Agregar al carrito";
+      conectarBotonAgregar(b, p);
+    });
   }
 
   // ---------- Cajón del carrito ----------
@@ -179,6 +304,66 @@
     return b;
   }
 
+  // "Complementa tu compra": productos de las categorías de COMPLEMENTOS que aún no están en el carrito.
+  function sugerencias(items) {
+    if (typeof COMPLEMENTOS === "undefined") return [];
+    const enCarrito = items.map(function (it) { return it.id; });
+    const categorias = [];
+    items.forEach(function (it) {
+      const p = productoPorId(it.id);
+      const lista = tieneClave(COMPLEMENTOS, p.categoria) ? COMPLEMENTOS[p.categoria] : [];
+      lista.forEach(function (c) { if (categorias.indexOf(c) === -1) categorias.push(c); });
+    });
+    const res = [];
+    categorias.forEach(function (c) {
+      PRODUCTOS.forEach(function (p) {
+        if (res.length < 2 && p.categoria === c && p.disponible &&
+            enCarrito.indexOf(p.id) === -1 && res.indexOf(p) === -1) res.push(p);
+      });
+    });
+    return res;
+  }
+
+  function renderSugerencias(items) {
+    if (!ui.sugerencias) return;
+    const lista = sugerencias(items);
+    ui.sugerencias.replaceChildren();
+    ui.complementa.hidden = lista.length === 0;
+    lista.forEach(function (p) {
+      const li = el("li", "sugerencia");
+      li.appendChild(el("span", "sugerencia-nombre", p.nombre));
+      li.appendChild(el("span", "sugerencia-precio", formatoPrecio(p.precio)));
+      li.appendChild(botonLinea("btn btn-secundario sugerencia-btn", "Agregar",
+        "Agregar " + p.nombre + " al carrito", "agregar", p.id));
+      ui.sugerencias.appendChild(li);
+    });
+  }
+
+  function envioGratisLogrado(total) {
+    const umbral = CONFIG.envioGratisDesde;
+    return typeof umbral === "number" && umbral > 0 && total >= umbral;
+  }
+
+  function renderEnvio() {
+    if (!ui.envio) return;
+    const total = Carrito.total();
+    const umbral = CONFIG.envioGratisDesde;
+    ui.envio.hidden = Carrito.items().length === 0;
+    ui.envio.classList.remove("logrado");
+    if (ui.entrega.value !== "otro") {
+      ui.envio.textContent = "Entrega gratis en Masaya.";
+      ui.envio.classList.add("logrado");
+    } else if (typeof umbral !== "number" || umbral <= 0) {
+      ui.envio.textContent = "Envío por CargoTrans: el costo se confirma por WhatsApp.";
+    } else if (envioGratisLogrado(total)) {
+      ui.envio.textContent = "¡Tu pedido tiene envío gratis a todo Nicaragua!";
+      ui.envio.classList.add("logrado");
+    } else {
+      ui.envio.textContent = "Te faltan " + formatoPrecio(umbral - total) +
+        " para tener envío gratis a todo Nicaragua.";
+    }
+  }
+
   function renderCarrito(enfocar) {
     if (!ui.lineas) return;
     const items = Carrito.items();
@@ -203,6 +388,8 @@
 
     ui.total.textContent = formatoPrecio(Carrito.total());
     ui.enviar.disabled = items.length === 0;
+    renderSugerencias(items);
+    renderEnvio();
 
     if (enfocar) {
       const objetivo = Array.prototype.find.call(
@@ -245,17 +432,23 @@
       return (i + 1) + ". " + p.nombre + " x" + it.cant + " — " + formatoPrecio(p.precio * it.cant);
     });
 
-    const entrega = ui.entrega.value === "otro"
-      ? "Otro departamento (envío por CargoTrans)"
-      : "Masaya (entrega gratis)";
+    const total = Carrito.total();
+    let entrega = "Masaya (entrega gratis)";
+    if (ui.entrega.value === "otro") {
+      entrega = envioGratisLogrado(total)
+        ? "Otro departamento (envío gratis por CargoTrans)"
+        : "Otro departamento (envío por CargoTrans)";
+    }
     const nombre = limpiar(ui.nombre.value);
     const ciudad = limpiar(ui.ciudad.value);
+    const vengo = origen();
 
     let mensaje = "¡Hola Studio 3! Quiero hacer este pedido:\n\n" + lineas.join("\n") +
-      "\n\nTotal estimado: " + formatoPrecio(Carrito.total()) +
+      "\n\nTotal estimado: " + formatoPrecio(total) +
       "\nEntrega: " + entrega;
     if (nombre) mensaje += "\nNombre: " + nombre;
     if (ciudad) mensaje += "\nCiudad: " + ciudad;
+    if (vengo) mensaje += "\nVengo de: " + vengo;
 
     abrirWhatsApp(mensaje);
   }
@@ -268,6 +461,9 @@
     ui.cerrar = document.getElementById("cerrar-carrito");
     ui.vacio = document.getElementById("carrito-vacio");
     ui.lineas = document.getElementById("carrito-lineas");
+    ui.complementa = document.getElementById("carrito-complementa");
+    ui.sugerencias = document.getElementById("carrito-sugerencias");
+    ui.envio = document.getElementById("carrito-envio");
     ui.total = document.getElementById("carrito-total");
     ui.entrega = document.getElementById("carrito-entrega");
     ui.nombre = document.getElementById("carrito-nombre");
@@ -282,6 +478,7 @@
     ui.cerrar.addEventListener("click", cerrarCarrito);
     ui.overlay.addEventListener("click", cerrarCarrito);
     ui.enviar.addEventListener("click", enviarPedido);
+    ui.entrega.addEventListener("change", renderEnvio);
 
     ui.lineas.addEventListener("click", function (e) {
       const b = e.target.closest("button[data-accion]");
@@ -293,6 +490,16 @@
       renderContador();
       renderCarrito({ id: id, accion: b.dataset.accion });
     });
+
+    if (ui.sugerencias) {
+      ui.sugerencias.addEventListener("click", function (e) {
+        const b = e.target.closest("button[data-accion='agregar']");
+        if (!b) return;
+        Carrito.agregar(b.dataset.id);
+        renderContador();
+        renderCarrito({ id: b.dataset.id, accion: "mas" });
+      });
+    }
 
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape") {
@@ -356,53 +563,14 @@
     });
   }
 
-  // ---------- Inicio: categorías y destacados ----------
-
-  const ICONOS = {
-    "power-banks": "M9 2h6v2h2a1 1 0 011 1v16a1 1 0 01-1 1H7a1 1 0 01-1-1V5a1 1 0 011-1h2zM12 8l-2.5 4H14l-2.5 4",
-    "parlantes": "M7 2h10a1 1 0 011 1v18a1 1 0 01-1 1H7a1 1 0 01-1-1V3a1 1 0 011-1zM12 6.5h.01M12 10a4.5 4.5 0 100 9 4.5 4.5 0 000-9z",
-    "cargadores": "M13 2L4 14h7l-1 8 9-12h-7z",
-    "audifonos": "M4 15v-3a8 8 0 0116 0v3M4 14h3v6H4zM17 14h3v6h-3z",
-    "smartwatches": "M8 2h8l1 4H7zM7 18h10l-1 4H8zM7 6h10v12H7zM12 9v3l2 1.5",
-    "cables": "M9 2v5M15 2v5M7 7h10v4a5 5 0 01-10 0zM12 16v6"
-  };
-
-  function iconoCategoria(id) {
-    const svg = document.createElementNS(SVG_NS, "svg");
-    svg.setAttribute("viewBox", "0 0 24 24");
-    svg.setAttribute("class", "icono-cat");
-    svg.setAttribute("aria-hidden", "true");
-    const path = document.createElementNS(SVG_NS, "path");
-    path.setAttribute("d", ICONOS[id] || ICONOS["cables"]);
-    svg.appendChild(path);
-    return svg;
-  }
-
-  function iniciarInicio() {
-    const cont = document.getElementById("categorias");
-    if (cont) {
-      CATEGORIAS.forEach(function (c) {
-        const a = el("a", "cat-tile");
-        a.href = "tienda.html?cat=" + encodeURIComponent(c.id);
-        a.appendChild(iconoCategoria(c.id));
-        a.appendChild(el("span", "cat-nombre", c.nombre));
-        cont.appendChild(a);
-      });
-    }
-    const dest = document.getElementById("destacados");
-    if (dest) {
-      PRODUCTOS.filter(function (p) { return p.destacado; })
-        .slice(0, 8)
-        .forEach(function (p) { dest.appendChild(tarjetaProducto(p)); });
-    }
-  }
-
   // ---------- Arranque ----------
 
-  window.Studio3 = { formatoPrecio, limpiar, Carrito, tarjetaProducto, categoriaValida, abrirWhatsApp, el };
+  window.Studio3 = { formatoPrecio, limpiar, Carrito, tarjetaProducto, categoriaValida, abrirWhatsApp, el, origen };
 
+  guardarOrigen();
   iniciarEnlaces();
   iniciarMenu();
   iniciarCarrito();
-  iniciarInicio();
+  iniciarListas();
+  iniciarFicha();
 })();

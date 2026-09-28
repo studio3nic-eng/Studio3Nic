@@ -1,0 +1,17 @@
+titulo: Tienda | Studio 3
+descripcion: Catálogo de Studio 3: power banks, parlantes, cargadores, audífonos, smartwatches, cables y combos. Arma tu carrito y envía el pedido por WhatsApp.
+activo: tienda
+script: js/tienda.js
+---
+<div class="contenedor">
+  <div class="pagina-cab">
+    <p class="eyebrow">Catálogo</p>
+    <h1>Tienda</h1>
+    <p>Elige una categoría, agrega al carrito y envía tu pedido por WhatsApp.</p>
+  </div>
+  <div class="chips" id="chips" role="group" aria-label="Filtrar por categoría"></div>
+  <p class="conteo" id="conteo" aria-live="polite"></p>
+  <div class="grilla-productos" id="productos">
+{{CATALOGO}}
+  </div>
+</div>

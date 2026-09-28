@@ -1,7 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/</loc></url>
-  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/tienda.html</loc></url>
-  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/revendedores.html</loc></url>
   <url><loc>https://studio3nic-eng.github.io/Studio3Nic/ayuda.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/revendedores.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/tienda.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/categoria/power-banks.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/categoria/parlantes.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/categoria/cargadores.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/categoria/audifonos.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/categoria/smartwatches.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/categoria/cables.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/categoria/combos.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-pb-1.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-pb-2.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-pa-1.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-pa-2.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-ca-1.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-ca-2.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-au-1.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-au-2.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-sw-1.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-sw-2.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-cb-1.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/demo-cb-2.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/combo-prueba-viaje.html</loc></url>
+  <url><loc>https://studio3nic-eng.github.io/Studio3Nic/producto/combo-prueba-audio.html</loc></url>
 </urlset>

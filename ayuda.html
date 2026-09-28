@@ -3,10 +3,11 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Ayuda | Studio 3</title>
-<meta name="description" content="Cómo comprar, envíos, garantía, preguntas frecuentes y privacidad en Studio 3, tienda de accesorios de tecnología en Masaya, Nicaragua.">
 <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
 <meta name="referrer" content="strict-origin-when-cross-origin">
+<title>Ayuda | Studio 3</title>
+<meta name="description" content="Cómo comprar, envíos, garantía, preguntas frecuentes y privacidad en Studio 3, tienda de accesorios de tecnología en Masaya, Nicaragua.">
+<link rel="canonical" href="https://studio3nic-eng.github.io/Studio3Nic/ayuda.html">
 <meta name="theme-color" content="#1F6FEB">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Studio 3">
@@ -21,7 +22,7 @@
 <link rel="icon" type="image/svg+xml" href="img/favicon.svg">
 <link rel="stylesheet" href="css/estilos.css">
 </head>
-<body>
+<body data-base="">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
 <header class="cabecera">
   <div class="contenedor cabecera-fila">
@@ -51,6 +52,10 @@
   <div class="drawer-cuerpo">
     <p class="vacio" id="carrito-vacio">Tu carrito está vacío. ¡Explora la tienda!</p>
     <ul class="lineas" id="carrito-lineas"></ul>
+    <div class="complementa" id="carrito-complementa" hidden>
+      <h3>Complementa tu compra</h3>
+      <ul class="sugerencias" id="carrito-sugerencias"></ul>
+    </div>
   </div>
   <div class="drawer-pie">
     <div class="campo">
@@ -60,6 +65,7 @@
         <option value="otro">Otro departamento: envío por CargoTrans</option>
       </select>
     </div>
+    <p class="envio-aviso" id="carrito-envio" hidden></p>
     <div class="campo">
       <label for="carrito-nombre">Nombre (opcional)</label>
       <input type="text" id="carrito-nombre" maxlength="60" autocomplete="name">
@@ -108,6 +114,7 @@
     <ul>
       <li><strong>Masaya:</strong> entrega gratis.</li>
       <li><strong>Resto de Nicaragua:</strong> enviamos por CargoTrans. El costo del envío se confirma por chat.</li>
+      <li><strong>Envío gratis:</strong> en pedidos desde el monto indicado en el carrito, el envío a cualquier departamento es gratis.</li>
     </ul>
     <!-- TODO: agregar tiempos de entrega, zonas de entrega en Masaya y horarios. -->
     <p class="pendiente">TODO: escribir tiempos de entrega, zonas de entrega en Masaya y horarios.</p>
@@ -151,6 +158,7 @@
   <section class="ayuda-seccion prosa" id="privacidad" aria-labelledby="h-privacidad">
     <h2 id="h-privacidad">Privacidad</h2>
     <p>Este sitio no guarda tus datos en ningún servidor. Tu carrito se guarda solo en tu navegador, y la información que escribes se envía únicamente en tu mensaje de WhatsApp a Studio 3.</p>
+    <p>Si llegaste desde un enlace de nuestras redes, tu navegador también recuerda de cuál red viniste (por 30 días) para incluirlo en tu mensaje de WhatsApp. No usamos cookies de rastreo ni publicidad.</p>
   </section>
 </div>
 </main>
@@ -174,6 +182,18 @@
           </a>
         </div>
       </div>
+      <nav aria-label="Categorías">
+        <h2>Categorías</h2>
+        <ul>
+          <li><a href="categoria/power-banks.html">Power Banks</a></li>
+          <li><a href="categoria/parlantes.html">Parlantes</a></li>
+          <li><a href="categoria/cargadores.html">Cargadores</a></li>
+          <li><a href="categoria/audifonos.html">Audífonos</a></li>
+          <li><a href="categoria/smartwatches.html">Smartwatches</a></li>
+          <li><a href="categoria/cables.html">Cables</a></li>
+          <li><a href="categoria/combos.html">Combos</a></li>
+        </ul>
+      </nav>
       <nav aria-label="Páginas">
         <h2>Páginas</h2>
         <ul>
