@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ayuda | Studio 3</title>
+<meta name="description" content="Cómo comprar, envíos, garantía, preguntas frecuentes y privacidad en Studio 3, tienda de accesorios de tecnología en Masaya, Nicaragua.">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; object-src 'none'">
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<meta name="theme-color" content="#1F6FEB">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Studio 3">
+<meta property="og:locale" content="es_NI">
+<meta property="og:title" content="Ayuda | Studio 3">
+<meta property="og:description" content="Cómo comprar, envíos, garantía, preguntas frecuentes y privacidad en Studio 3, tienda de accesorios de tecnología en Masaya, Nicaragua.">
+<meta property="og:url" content="https://TU-DOMINIO/ayuda.html">
+<meta property="og:image" content="https://TU-DOMINIO/img/compartir.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" type="image/svg+xml" href="img/favicon.svg">
+<link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+<a class="saltar" href="#contenido">Saltar al contenido</a>
+<header class="cabecera">
+  <div class="contenedor cabecera-fila">
+    <a class="marca" href="index.html" aria-label="Studio 3, ir al inicio"><span class="marca-texto">STUDIO<sup>3</sup></span></a>
+    <nav class="nav" id="nav-principal" aria-label="Principal">
+      <a href="index.html">Inicio</a>
+      <a href="tienda.html">Tienda</a>
+      <a href="revendedores.html">Revendedores</a>
+      <a href="ayuda.html" aria-current="page">Ayuda</a>
+    </nav>
+    <div class="cabecera-acciones">
+      <button type="button" class="btn-menu" id="btn-menu" aria-expanded="false" aria-controls="nav-principal">Menú</button>
+      <button type="button" class="btn-carrito" id="btn-carrito" aria-label="Abrir carrito">
+        <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 7h12l1 13H5zM9 7a3 3 0 016 0"/></svg>
+        <span class="contador" id="contador" hidden>0</span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<div class="overlay" id="overlay" hidden></div>
+<aside class="drawer" id="carrito" role="dialog" aria-modal="true" aria-labelledby="carrito-titulo" aria-hidden="true">
+  <div class="drawer-cab">
+    <h2 id="carrito-titulo">Tu carrito</h2>
+    <button type="button" class="cerrar" id="cerrar-carrito" aria-label="Cerrar carrito">×</button>
+  </div>
+  <div class="drawer-cuerpo">
+    <p class="vacio" id="carrito-vacio">Tu carrito está vacío. ¡Explora la tienda!</p>
+    <ul class="lineas" id="carrito-lineas"></ul>
+  </div>
+  <div class="drawer-pie">
+    <div class="campo">
+      <label for="carrito-entrega">Entrega</label>
+      <select id="carrito-entrega">
+        <option value="masaya">Masaya: entrega gratis</option>
+        <option value="otro">Otro departamento: envío por CargoTrans</option>
+      </select>
+    </div>
+    <div class="campo">
+      <label for="carrito-nombre">Nombre (opcional)</label>
+      <input type="text" id="carrito-nombre" maxlength="60" autocomplete="name">
+    </div>
+    <div class="campo">
+      <label for="carrito-ciudad">Ciudad (opcional)</label>
+      <input type="text" id="carrito-ciudad" maxlength="60" autocomplete="address-level2">
+    </div>
+    <p class="total">Total estimado: <strong id="carrito-total">C$ 0</strong></p>
+    <button type="button" class="btn btn-wa btn-bloque" id="carrito-enviar" disabled>
+      <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zM8.5 8.5c0 3.5 3 6.5 6.5 6.5l1.5-1.5-2-1-1 .8a4 4 0 01-2.3-2.3l.8-1-1-2z"/></svg>
+      Enviar pedido por WhatsApp
+    </button>
+    <p class="nota">Los precios y la disponibilidad se confirman por WhatsApp. No se realiza ningún pago en este sitio.</p>
+  </div>
+</aside>
+
+<main id="contenido">
+<div class="contenedor">
+  <div class="pagina-cab">
+    <p class="eyebrow">Centro de ayuda</p>
+    <h1>Ayuda</h1>
+    <nav class="indice" aria-label="Secciones de ayuda">
+      <a href="#como-comprar">Cómo comprar</a>
+      <a href="#envios">Envíos</a>
+      <a href="#garantia">Garantía</a>
+      <a href="#preguntas">Preguntas frecuentes</a>
+      <a href="#privacidad">Privacidad</a>
+    </nav>
+  </div>
+
+  <section class="ayuda-seccion prosa" id="como-comprar" aria-labelledby="h-como">
+    <h2 id="h-como">Cómo comprar</h2>
+    <ol class="pasos">
+      <li>Elige tus productos y agrégalos al carrito.</li>
+      <li>Toca "Enviar pedido por WhatsApp".</li>
+      <li>Te confirmamos disponibilidad, total y entrega por chat.</li>
+    </ol>
+    <p>En este sitio no se paga nada. El carrito solo arma tu pedido; el total final y la forma de pago los acordamos por WhatsApp.</p>
+    <!-- TODO: agregar las formas de pago aceptadas (efectivo, transferencia, etc.). -->
+    <p class="pendiente">TODO: escribir las formas de pago que acepta Studio 3.</p>
+  </section>
+
+  <section class="ayuda-seccion prosa" id="envios" aria-labelledby="h-envios">
+    <h2 id="h-envios">Envíos</h2>
+    <ul>
+      <li><strong>Masaya:</strong> entrega gratis.</li>
+      <li><strong>Resto de Nicaragua:</strong> enviamos por CargoTrans. El costo del envío se confirma por chat.</li>
+    </ul>
+    <!-- TODO: agregar tiempos de entrega, zonas de entrega en Masaya y horarios. -->
+    <p class="pendiente">TODO: escribir tiempos de entrega, zonas de entrega en Masaya y horarios.</p>
+  </section>
+
+  <section class="ayuda-seccion prosa" id="garantia" aria-labelledby="h-garantia">
+    <h2 id="h-garantia">Garantía</h2>
+    <p>Todos nuestros productos tienen garantía.</p>
+    <!-- TODO: agregar los términos reales de la garantía (duración, qué cubre, qué no cubre, cómo reclamarla). -->
+    <p class="pendiente">TODO: los dueños deben escribir los términos reales de la garantía (duración, qué cubre, qué no cubre y cómo reclamarla).</p>
+  </section>
+
+  <section class="ayuda-seccion prosa" id="preguntas" aria-labelledby="h-preguntas">
+    <h2 id="h-preguntas">Preguntas frecuentes</h2>
+    <div>
+      <details class="pregunta">
+        <summary>¿Puedo pagar en el sitio web?</summary>
+        <p>No. El sitio es un catálogo: armas tu pedido y lo envías por WhatsApp. Ahí confirmamos todo contigo.</p>
+      </details>
+      <details class="pregunta">
+        <summary>¿Cómo sé si el producto está disponible?</summary>
+        <p>Al recibir tu pedido te confirmamos la disponibilidad por WhatsApp. Los productos agotados aparecen marcados en la tienda.</p>
+      </details>
+      <details class="pregunta">
+        <summary>¿Hacen envíos fuera de Masaya?</summary>
+        <p>Sí, a todo Nicaragua por CargoTrans. El costo se confirma por chat.</p>
+      </details>
+      <details class="pregunta">
+        <summary>¿Venden al por mayor?</summary>
+        <p>Sí. Si quieres revender, llena la solicitud en la página de <a href="revendedores.html">Revendedores</a>.</p>
+      </details>
+      <details class="pregunta">
+        <summary>¿Los productos tienen garantía?</summary>
+        <p>Sí, todos. Mira la sección de <a href="#garantia">Garantía</a> más arriba.</p>
+      </details>
+    </div>
+    <!-- TODO: agregar más preguntas frecuentes reales según lo que más preguntan los clientes. -->
+    <p class="pendiente">TODO: agregar las preguntas que más hacen los clientes.</p>
+  </section>
+
+  <section class="ayuda-seccion prosa" id="privacidad" aria-labelledby="h-privacidad">
+    <h2 id="h-privacidad">Privacidad</h2>
+    <p>Este sitio no guarda tus datos en ningún servidor. Tu carrito se guarda solo en tu navegador, y la información que escribes se envía únicamente en tu mensaje de WhatsApp a Studio 3.</p>
+  </section>
+</div>
+</main>
+
+<footer class="pie">
+  <div class="contenedor">
+    <div class="pie-grid">
+      <div>
+        <p class="marca-texto">STUDIO<sup>3</sup></p>
+        <p class="suave">Masaya, Nicaragua</p>
+        <p><a href="https://wa.me/50587146561" data-wa target="_blank" rel="noopener noreferrer">WhatsApp +505 8714-6561</a></p>
+        <div class="pie-redes">
+          <a href="https://www.instagram.com/studio3.ni" data-red="instagram" target="_blank" rel="noopener noreferrer" aria-label="Instagram de Studio 3">
+            <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><path d="M17.5 6.5h.01"/></svg>
+          </a>
+          <a href="https://www.tiktok.com/@studio3.ni" data-red="tiktok" target="_blank" rel="noopener noreferrer" aria-label="TikTok de Studio 3">
+            <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3v11.5a3.5 3.5 0 11-3.5-3.5M14 3c.3 2.5 2 4.2 5 4.5"/></svg>
+          </a>
+          <a href="PEGAR-AQUI-EL-ENLACE-DE-FACEBOOK" data-red="facebook" target="_blank" rel="noopener noreferrer" aria-label="Facebook de Studio 3">
+            <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M15 3h-2.5A3.5 3.5 0 009 6.5V9H6v4h3v8h4v-8h3l1-4h-4V6.5c0-.3.2-.5.5-.5H15z"/></svg>
+          </a>
+        </div>
+      </div>
+      <nav aria-label="Páginas">
+        <h2>Páginas</h2>
+        <ul>
+          <li><a href="index.html">Inicio</a></li>
+          <li><a href="tienda.html">Tienda</a></li>
+          <li><a href="revendedores.html">Revendedores</a></li>
+          <li><a href="ayuda.html">Ayuda</a></li>
+        </ul>
+      </nav>
+      <nav aria-label="Ayuda">
+        <h2>Ayuda</h2>
+        <ul>
+          <li><a href="ayuda.html#envios">Envíos</a></li>
+          <li><a href="ayuda.html#garantia">Garantía</a></li>
+          <li><a href="ayuda.html#privacidad">Privacidad</a></li>
+        </ul>
+      </nav>
+    </div>
+    <p class="copy">© 2026 Studio 3</p>
+  </div>
+</footer>
+
+<a class="wa-flotante" href="https://wa.me/50587146561" data-wa target="_blank" rel="noopener noreferrer" aria-label="Escríbenos por WhatsApp">
+  <svg class="icono-linea" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 00-8.6 15.1L2 22l5-1.3A10 10 0 1012 2zM8.5 8.5c0 3.5 3 6.5 6.5 6.5l1.5-1.5-2-1-1 .8a4 4 0 01-2.3-2.3l.8-1-1-2z"/></svg>
+</a>
+
+<script src="js/config.js" defer></script>
+<script src="js/productos.js" defer></script>
+<script src="js/app.js" defer></script>
+</body>
+</html>
