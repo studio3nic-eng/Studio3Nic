@@ -6,7 +6,7 @@ activo: inicio
   <div class="contenedor hero-grid">
     <div class="hero-texto">
       <p class="eyebrow">Tecnología y accesorios</p>
-      <h1>Todo para tus dispositivos</h1>
+      <h1>Todo para tus <span class="acento">dispositivos</span></h1>
       <p class="sub">Power banks, parlantes, cargadores, audífonos, smartwatches y cables. Envíos a todo Nicaragua.</p>
       <div class="botones">
         <a class="btn btn-primario" href="{{P}}tienda.html">Ver tienda</a>
@@ -15,8 +15,13 @@ activo: inicio
           Escríbenos por WhatsApp
         </a>
       </div>
+      <ul class="lista-check hero-checks">
+        <li>Entrega gratis en Masaya</li>
+        <li>Envíos a todo Nicaragua</li>
+        <li>Garantía en todos los productos</li>
+      </ul>
     </div>
-    <img class="hero-logo" src="{{P}}img/logo/logo-3d.png" width="640" height="640" alt="Logo de Studio 3 con unos audífonos inalámbricos negros">
+    <img class="hero-logo" src="{{P}}img/logo/logo-3d.png" width="640" height="640" fetchpriority="high" alt="Logo de Studio 3 con unos audífonos inalámbricos negros">
   </div>
 </section>
 
@@ -79,12 +84,28 @@ activo: inicio
     <div class="seccion-cab">
       <h2 id="t-confianza">Compra con confianza</h2>
     </div>
-    <ul class="confianza">
-      <li>Ventas al por mayor y al detalle</li>
-      <li>Envíos a todo Nicaragua</li>
-      <li>Garantía en todos los productos</li>
-      <li>Entrega gratis en Masaya</li>
-    </ul>
+    <div class="cajas cuatro dos-col-movil">
+      <div class="caja">
+        <svg class="icono-caja" viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9l1-5h14l1 5M4 9v11h16V9M4 9a2.7 2.7 0 005.3 0 2.7 2.7 0 005.4 0A2.7 2.7 0 0020 9M10 20v-5h4v5"/></svg>
+        <h3>Ventas al por mayor y al detalle</h3>
+        <p>Compra una pieza o por volumen.</p>
+      </div>
+      <div class="caja">
+        <svg class="icono-caja" viewBox="0 0 24 24" aria-hidden="true"><path d="M3 6h11v10H3zM14 9h4l3 3v4h-7zM7 19.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3zM17 19.5a1.5 1.5 0 100-3 1.5 1.5 0 000 3z"/></svg>
+        <h3>Envíos a todo Nicaragua</h3>
+        <p>Por CargoTrans; el costo se confirma por chat.</p>
+      </div>
+      <div class="caja">
+        <svg class="icono-caja" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 3v6c0 4.5-3.2 8-8 9-4.8-1-8-4.5-8-9V6zM8.5 12l2.5 2.5 4.5-5"/></svg>
+        <h3>Garantía en todos los productos</h3>
+        <p>Compra con tranquilidad.</p>
+      </div>
+      <div class="caja">
+        <svg class="icono-caja" viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 005 9.5C5 14.8 12 21 12 21zM12 12a2.5 2.5 0 100-5 2.5 2.5 0 000 5z"/></svg>
+        <h3>Entrega gratis en Masaya</h3>
+        <p>Sin costo de envío dentro de Masaya.</p>
+      </div>
+    </div>
   </div>
 </section>
 

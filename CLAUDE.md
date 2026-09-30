@@ -72,6 +72,7 @@ img/marca/            logo-original.png, portada.png (reference designs)
 img/logo/             logo-plano.svg, logo-3d.webp, icono-3.png (from designer; logo-3d.png copy until then)
 img/productos/        one square .webp per product, file name = product id
 img/compartir.jpg     1200×630 link preview (cropped from portada.png)
+img/apple-touch-icon.png  180×180 home-screen icon (blue "3" on white, matches favicon.svg)
 fuentes/              poppins-400/500/700/800.woff2
 ```
 
@@ -98,8 +99,15 @@ parses it with `ConvertFrom-Json`.
   "precio": 650, "imagen": "img/productos/pb-10000-negro.webp",
   "descripcion": "Salidas USB-C y USB-A.", "destacado": true, "disponible": true }
 ```
-Optional `"incluye": ["id-1", "id-2"]` makes a combo: cards show "Incluye: …" and "Ahorras C$ X"
-(sum of parts − price, only if > 0). `COMPLEMENTOS` maps category → categories suggested in the cart.
+Optional `"incluye": ["id-1", "id-2"]` makes a combo: cards show "Incluye: …" and an "Ahorras C$ X" badge
+on the photo (sum of parts − price, only if > 0). Other optional fields: `"etiqueta"` (badge on the photo, ≤ 20 chars,
+e.g. "Nuevo"; "Agotado" and "Ahorras" take priority), `"imagenes"` (extra photos → thumbnails on the product page),
+`"caracteristicas"` (spec bullets on the product page). `generar.ps1` validates the extra photos exist.
+Also built in (pre-launch polish, 2026-09-29): top announcement bar (from `CONFIG.envioGratisDesde`), "Agregado" toast +
+cart-counter bump, cart line thumbnails, sticky "Agregar al carrito" bar on product pages (phones), floating WhatsApp
+prefilled with the product name on product pages, tienda search + price sort (only when > 20 products), chips as a
+horizontal scroll row on phones, scroll fade-in of `main .seccion`, smaller "C$" in prices, category tile counts.
+Not done (need owner/designer assets): real photos, transparent logo, testimonials, social photo grid, footer hours. `COMPLEMENTOS` maps category → categories suggested in the cart.
 Names follow the search pattern "qué es + capacidad/modelo + dato clave".
 Until real products arrive, placeholders are named "[PRUEBA] …" (12 products + 2 combos) with a
 neutral placeholder image, and the file keeps the `// TODO: reemplazar con productos reales` comment.

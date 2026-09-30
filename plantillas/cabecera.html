@@ -16,10 +16,12 @@
 <meta property="og:url" content="{{URL}}">
 {{OG_IMAGEN}}<meta name="twitter:card" content="summary_large_image">
 <link rel="icon" type="image/svg+xml" href="{{P}}img/favicon.svg">
+<link rel="apple-touch-icon" href="{{P}}img/apple-touch-icon.png">
 <link rel="stylesheet" href="{{P}}css/estilos.css">
 {{JSONLD}}</head>
 <body data-base="{{P}}">
 <a class="saltar" href="#contenido">Saltar al contenido</a>
+<div class="aviso-top"><p class="contenedor" id="aviso-texto">{{AVISO}}</p></div>
 <header class="cabecera">
   <div class="contenedor cabecera-fila">
     <a class="marca" href="{{P}}index.html" aria-label="Studio 3, ir al inicio"><span class="marca-texto">STUDIO<sup>3</sup></span></a>
@@ -46,7 +48,10 @@
     <button type="button" class="cerrar" id="cerrar-carrito" aria-label="Cerrar carrito">×</button>
   </div>
   <div class="drawer-cuerpo">
-    <p class="vacio" id="carrito-vacio">Tu carrito está vacío. ¡Explora la tienda!</p>
+    <div class="vacio" id="carrito-vacio">
+      <p>Tu carrito está vacío. ¡Explora la tienda!</p>
+      <a class="btn btn-primario" href="{{P}}tienda.html">Ir a la tienda</a>
+    </div>
     <ul class="lineas" id="carrito-lineas"></ul>
     <div class="complementa" id="carrito-complementa" hidden>
       <h3>Complementa tu compra</h3>

@@ -6,14 +6,15 @@
       <li><span aria-current="page">{{NOMBRE}}</span></li>
     </ol>
   </nav>
-  <div class="producto-grid">
-    <img class="producto-img" src="{{IMG}}" width="800" height="800" alt="{{NOMBRE}}">
+  <div class="producto-grid" data-producto="{{ID}}">
+{{GALERIA}}
     <div class="producto-info">
       <p class="eyebrow"><a href="{{P}}categoria/{{CAT_ID}}.html">{{CAT_NOMBRE}}</a></p>
       <h1 class="producto-nombre">{{NOMBRE}}</h1>
       <p class="producto-precio" data-precio="{{ID}}">{{PRECIO}}</p>
       <p class="estado{{ESTADO_CLASE}}" data-estado="{{ID}}">{{ESTADO}}</p>
 {{INCLUYE}}      <p class="producto-desc">{{DESC_PROD}}</p>
+{{CARACTERISTICAS}}
       <div class="producto-acciones">
         {{BOTON}}
         <a class="btn btn-secundario" href="{{WA_URL}}" target="_blank" rel="noopener noreferrer">Preguntar por WhatsApp</a>
@@ -31,4 +32,8 @@
 {{RELACIONADOS}}
     </div>
   </section>
+  <div class="barra-compra" id="barra-compra">
+    <p class="barra-precio" data-precio="{{ID}}">{{PRECIO}}</p>
+    {{BOTON}}
+  </div>
 </div>

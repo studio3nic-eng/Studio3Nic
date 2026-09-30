@@ -44,6 +44,12 @@ $WA = DeConfig "whatsapp"
 $MONEDA = DeConfig "moneda"
 $REDES = @((DeConfig "instagram"), (DeConfig "tiktok"), (DeConfig "facebook")) | Where-Object { $_ -like "https://*" }
 function Precio($n) { "$MONEDA " + ([double]$n).ToString("#,0", $inv) }
+# Precio con "C$" más pequeño y suave (igual que ponerPrecio en js/app.js).
+function PrecioHtml($n) { "<span class=`"moneda`">$MONEDA</span> " + ([double]$n).ToString("#,0", $inv) }
+# Envío gratis fuera de Masaya desde este total; vacío si es null.
+$mUmbral = [regex]::Match($config, 'envioGratisDesde\s*:\s*(\d+)')
+$UMBRAL = if ($mUmbral.Success) { [double]$mUmbral.Groups[1].Value } else { 0 }
+$AVISO = if ($UMBRAL -gt 0) { "Entrega gratis en Masaya · Envío gratis desde $(Precio $UMBRAL)" } else { "Entrega gratis en Masaya · Envíos a todo Nicaragua" }
 
 # ---------- Datos (js/productos.js) ----------
 
@@ -91,6 +97,22 @@ foreach ($p in $PRODS) {
   } elseif (-not (Test-Path -LiteralPath (Join-Path $raiz $img) -PathType Leaf)) {
     $errores.Add("El producto ${id}: no encuentro la foto '$img'.")
   }
+  # Opcionales: fotos extra, características y etiqueta sobre la foto.
+  foreach ($extra in @($p.imagenes)) {
+    if ($null -eq $extra) { continue }
+    $e = [string]$extra
+    if ($e -notmatch '^img/[A-Za-z0-9/_.-]+$' -or $e -match '\.\.') {
+      $errores.Add("El producto ${id}: la foto extra '$e' debe estar dentro de img/.")
+    } elseif (-not (Test-Path -LiteralPath (Join-Path $raiz $e) -PathType Leaf)) {
+      $errores.Add("El producto ${id}: no encuentro la foto extra '$e'.")
+    }
+  }
+  foreach ($c in @($p.caracteristicas)) {
+    if ($null -ne $c -and -not ([string]$c).Trim()) { $errores.Add("El producto ${id} tiene una característica vacía.") }
+  }
+  if ($null -ne $p.etiqueta -and ([string]$p.etiqueta).Length -gt 20) {
+    $errores.Add("El producto ${id}: 'etiqueta' es demasiado larga (máximo 20 caracteres, ej. Nuevo).")
+  }
 }
 foreach ($p in $PRODS) {
   foreach ($i in @($p.incluye)) {
@@ -131,18 +153,26 @@ function Tarjeta($p, [string]$pre) {
   $partes = Incluidos $p
   if ($partes.Count -gt 0) {
     $extra += "    <p class=`"tarjeta-incluye`">Incluye: " + (($partes | ForEach-Object { Html $_.nombre }) -join " + ") + "</p>`n"
-    $a = Ahorro $p
-    if ($a -gt 0) { $extra += "    <p class=`"etiqueta-ahorro`">Ahorras $(Precio $a)</p>`n" }
   }
-  if ($p.disponible) { $boton = "<button type=`"button`" class=`"btn btn-primario btn-bloque`" data-agregar=`"$($p.id)`">Agregar al carrito</button>" }
+  # Etiqueta sobre la foto: Agotado > Ahorras (combos) > "etiqueta" opcional (igual que insigniaProducto en js/app.js).
+  $insignia = ""
+  if (-not $p.disponible) { $insignia = "<span class=`"insignia insignia-agotado`">Agotado</span>" }
+  elseif ((Ahorro $p) -gt 0) { $insignia = "<span class=`"insignia insignia-ahorro`">Ahorras $(Precio (Ahorro $p))</span>" }
+  elseif ($p.etiqueta -and ([string]$p.etiqueta).Trim()) { $insignia = "<span class=`"insignia`">$(Html ([string]$p.etiqueta).Trim())</span>" }
+  $claseTarjeta = if ($p.disponible) { "tarjeta-producto" } else { "tarjeta-producto agotado" }
+  $iconoCarrito = "<svg class=`"icono-linea`" viewBox=`"0 0 24 24`" aria-hidden=`"true`"><path d=`"M6 7h12l1 13H5zM9 7a3 3 0 016 0`"/></svg>"
+  if ($p.disponible) { $boton = "<button type=`"button`" class=`"btn btn-primario btn-bloque`" data-agregar=`"$($p.id)`">$iconoCarrito<span class=`"btn-txt`">Agregar<span class=`"btn-extra`"> al carrito</span></span></button>" }
   else { $boton = "<button type=`"button`" class=`"btn btn-primario btn-bloque`" disabled>Agotado</button>" }
   @"
-<article class="tarjeta-producto">
-  <a class="tarjeta-enlace-img" href="$url" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="$pre$(Html $p.imagen)" alt="$nombre" width="400" height="400" loading="lazy" decoding="async"></a>
+<article class="$claseTarjeta">
+  <div class="tarjeta-media">
+    <a class="tarjeta-enlace-img" href="$url" tabindex="-1" aria-hidden="true"><img class="tarjeta-img" src="$pre$(Html $p.imagen)" alt="$nombre" width="400" height="400" loading="lazy" decoding="async"></a>
+    $insignia
+  </div>
   <div class="tarjeta-cuerpo">
     <h3 class="tarjeta-nombre"><a href="$url">$nombre</a></h3>
 $extra    <p class="tarjeta-desc">$(Html $p.descripcion)</p>
-    <p class="tarjeta-precio">$(Precio $p.precio)</p>
+    <p class="tarjeta-precio">$(PrecioHtml $p.precio)</p>
     $boton
   </div>
 </article>
@@ -200,7 +230,7 @@ function Variables([string]$pre, [string]$activo) {
   $v = @{
     P = $pre; A_inicio = ""; A_tienda = ""; A_emprender = ""; A_ayuda = ""
     HEAD_EXTRA = ""; JSONLD = ""; OG_TIPO = "website"; OG_IMAGEN = $OG_DEFECTO; SCRIPT = ""
-    PIE_CATEGORIAS = $pie
+    PIE_CATEGORIAS = $pie; AVISO = $AVISO
   }
   if ($activo) { $v["A_$activo"] = ' aria-current="page"' }
   $v
@@ -234,7 +264,9 @@ foreach ($carpeta in "categoria", "producto") {
 
 # Bloques compartidos por las páginas principales.
 $tiles = ($catPorId.Values | Where-Object { $_.id -ne "combos" } | ForEach-Object {
-  "      <a class=`"cat-tile`" href=`"categoria/$($_.id).html`"><svg class=`"icono-cat`" viewBox=`"0 0 24 24`" aria-hidden=`"true`"><path d=`"$(Icono $_.id)`"/></svg><span class=`"cat-nombre`">$(Html $_.nombre)</span></a>"
+  $n = (DeCategoria $_.id).Count
+  $conteo = if ($n -eq 0) { "Próximamente" } elseif ($n -eq 1) { "1 producto" } else { "$n productos" }
+  "      <a class=`"cat-tile`" href=`"categoria/$($_.id).html`"><span class=`"cat-icono`"><svg class=`"icono-cat`" viewBox=`"0 0 24 24`" aria-hidden=`"true`"><path d=`"$(Icono $_.id)`"/></svg></span><span class=`"cat-nombre`">$(Html $_.nombre)</span><span class=`"cat-conteo`" data-conteo-cat=`"$($_.id)`">$conteo</span></a>"
 }) -join "`n"
 $combos = DeCategoria "combos"
 
@@ -298,7 +330,27 @@ foreach ($p in $PRODS) {
   if ($p.imagen -match '\.(jpe?g|png)$') { $v["OG_IMAGEN"] = "<meta property=`"og:image`" content=`"$(ImagenAbsoluta $p.imagen)`">`n" }
   $v["HEAD_EXTRA"] = "<meta property=`"product:price:amount`" content=`"$($p.precio)`">`n<meta property=`"product:price:currency`" content=`"NIO`">`n"
   $v["ID"] = $p.id; $v["NOMBRE"] = Html $p.nombre; $v["DESC_PROD"] = Html $p.descripcion
-  $v["PRECIO"] = Precio $p.precio; $v["IMG"] = "../" + (Html $p.imagen)
+  $v["PRECIO"] = PrecioHtml $p.precio; $v["IMG"] = "../" + (Html $p.imagen)
+  # Foto principal + miniaturas si el producto tiene "imagenes" extra (las miniaturas las conecta js/app.js).
+  $fotos = @(@($p.imagenes) | Where-Object { $null -ne $_ })
+  $imgPrincipal = "<img class=`"producto-img`" id=`"foto-principal`" src=`"$($v.IMG)`" width=`"800`" height=`"800`" fetchpriority=`"high`" alt=`"$(Html $p.nombre)`">"
+  if ($fotos.Count -eq 0) {
+    $v["GALERIA"] = "    $imgPrincipal"
+  } else {
+    $n = 0
+    $minis = (@($p.imagen) + $fotos | ForEach-Object {
+      $n++
+      $pres = if ($n -eq 1) { "true" } else { "false" }
+      "        <button type=`"button`" class=`"miniatura`" data-foto=`"../$(Html $_)`" aria-pressed=`"$pres`" aria-label=`"Ver foto $n`"><img src=`"../$(Html $_)`" alt=`"`" width=`"64`" height=`"64`" loading=`"lazy`"></button>"
+    }) -join "`n"
+    $v["GALERIA"] = "    <div class=`"galeria`">`n      $imgPrincipal`n      <div class=`"miniaturas`" role=`"group`" aria-label=`"Fotos del producto`">`n$minis`n      </div>`n    </div>"
+  }
+  $specs = @(@($p.caracteristicas) | Where-Object { $null -ne $_ })
+  $v["CARACTERISTICAS"] = ""
+  if ($specs.Count -gt 0) {
+    $li = ($specs | ForEach-Object { "        <li>$(Html $_)</li>" }) -join "`n"
+    $v["CARACTERISTICAS"] = "      <div class=`"producto-specs`">`n        <h2>Características</h2>`n        <ul class=`"lista-check`">`n$li`n        </ul>`n      </div>`n"
+  }
   $v["CAT_ID"] = $c.id; $v["CAT_NOMBRE"] = Html $c.nombre
   if ($p.disponible) {
     $v["ESTADO"] = "Disponible"; $v["ESTADO_CLASE"] = ""
@@ -324,7 +376,7 @@ foreach ($p in $PRODS) {
     name = [string]$p.nombre
     description = [string]$p.descripcion
     sku = [string]$p.id
-    image = @(ImagenAbsoluta $p.imagen)
+    image = @(@($p.imagen) + $fotos | ForEach-Object { ImagenAbsoluta $_ })
     category = [string]$c.nombre
     offers = [ordered]@{
       "@type" = "Offer"

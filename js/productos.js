@@ -19,6 +19,9 @@
 //
 // Campos opcionales:
 //   "incluye": ["id-1", "id-2"]  -> para combos: muestra qué trae y cuánto se ahorra.
+//   "etiqueta": "Nuevo"           -> cartelito sobre la foto (máx. 20 letras; ej. "Nuevo", "Más vendido").
+//   "imagenes": ["img/productos/<id>-2.webp"]  -> fotos extra: la página del producto muestra miniaturas.
+//   "caracteristicas": ["Carga rápida 20W", "Incluye cable"]  -> lista de características en la página del producto.
 
 const CATEGORIAS = [
   { "id": "power-banks", "nombre": "Power Banks",

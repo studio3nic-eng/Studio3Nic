@@ -4,6 +4,7 @@
 
   const CLAVE_CARRITO = "studio3-carrito";
   const CLAVE_ORIGEN = "studio3-origen";
+  const ICONO_CARRITO = "M6 7h12l1 13H5zM9 7a3 3 0 016 0";
   const DIAS_ORIGEN = 30;
   // Prefijo de rutas: "" en la raíz, "../" en categoria/ y producto/ (lo pone generar.ps1 en <body data-base>).
   const BASE = document.body.dataset.base || "";
@@ -21,6 +22,30 @@
       .trim()
       .slice(0, 60)
       .trim();
+  }
+
+  // Precio con "C$" más pequeño y suave: <span class="moneda">C$</span> 1,450
+  function ponerPrecio(nodo, n) {
+    nodo.replaceChildren(
+      el("span", "moneda", CONFIG.moneda),
+      document.createTextNode(" " + Number(n).toLocaleString("en-US"))
+    );
+  }
+
+  function icono(d) {
+    const NS = "http://www.w3.org/2000/svg";
+    const svg = document.createElementNS(NS, "svg");
+    svg.setAttribute("class", "icono-linea");
+    svg.setAttribute("viewBox", "0 0 24 24");
+    svg.setAttribute("aria-hidden", "true");
+    const path = document.createElementNS(NS, "path");
+    path.setAttribute("d", d);
+    svg.appendChild(path);
+    return svg;
+  }
+
+  function textoConteo(n) {
+    return n === 0 ? "Próximamente" : n + (n === 1 ? " producto" : " productos");
   }
 
   function el(etiqueta, clase, texto) {
@@ -157,21 +182,42 @@
 
   // ---------- Tarjeta de producto ----------
 
+  // En las tarjetas el texto va en <span class="btn-txt"> ("Agregar" + " al carrito", que se oculta en pantallas angostas).
+  function ponerTextoBoton(boton, corto, extra) {
+    const t = boton.querySelector(".btn-txt");
+    if (!t) {
+      boton.textContent = corto + (extra || "");
+      return;
+    }
+    t.replaceChildren(document.createTextNode(corto));
+    if (extra) t.appendChild(el("span", "btn-extra", extra));
+  }
+
   function conectarBotonAgregar(boton, p) {
     let temporizador = null;
     boton.addEventListener("click", function () {
       Carrito.agregar(p.id);
       notificarCambio();
-      boton.textContent = "Agregado";
+      avisarAgregado(p);
+      ponerTextoBoton(boton, "Agregado");
       clearTimeout(temporizador);
       temporizador = setTimeout(function () {
-        boton.textContent = "Agregar al carrito";
+        ponerTextoBoton(boton, "Agregar", " al carrito");
       }, 1500);
     });
   }
 
+  // Etiqueta sobre la foto: Agotado > "Ahorras C$ X" (combos) > "etiqueta" opcional del producto (p. ej. "Nuevo").
+  function insigniaProducto(p) {
+    if (!p.disponible) return el("span", "insignia insignia-agotado", "Agotado");
+    const a = ahorro(p);
+    if (a > 0) return el("span", "insignia insignia-ahorro", "Ahorras " + formatoPrecio(a));
+    if (typeof p.etiqueta === "string" && limpiar(p.etiqueta)) return el("span", "insignia", limpiar(p.etiqueta));
+    return null;
+  }
+
   function tarjetaProducto(p) {
-    const tarjeta = el("article", "tarjeta-producto");
+    const tarjeta = el("article", p.disponible ? "tarjeta-producto" : "tarjeta-producto agotado");
     const url = urlProducto(p.id);
 
     const enlaceImg = el("a", "tarjeta-enlace-img");
@@ -186,7 +232,11 @@
     img.loading = "lazy";
     img.decoding = "async";
     enlaceImg.appendChild(img);
-    tarjeta.appendChild(enlaceImg);
+    const media = el("div", "tarjeta-media");
+    media.appendChild(enlaceImg);
+    const insignia = insigniaProducto(p);
+    if (insignia) media.appendChild(insignia);
+    tarjeta.appendChild(media);
 
     const cuerpo = el("div", "tarjeta-cuerpo");
     const titulo = el("h3", "tarjeta-nombre");
@@ -199,17 +249,19 @@
     if (partes.length) {
       cuerpo.appendChild(el("p", "tarjeta-incluye",
         "Incluye: " + partes.map(function (x) { return x.nombre; }).join(" + ")));
-      const a = ahorro(p);
-      if (a > 0) cuerpo.appendChild(el("p", "etiqueta-ahorro", "Ahorras " + formatoPrecio(a)));
     }
 
     cuerpo.appendChild(el("p", "tarjeta-desc", p.descripcion));
-    cuerpo.appendChild(el("p", "tarjeta-precio", formatoPrecio(p.precio)));
+    const precio = el("p", "tarjeta-precio");
+    ponerPrecio(precio, p.precio);
+    cuerpo.appendChild(precio);
 
     const boton = el("button", "btn btn-primario btn-bloque");
     boton.type = "button";
     if (p.disponible) {
-      boton.textContent = "Agregar al carrito";
+      boton.appendChild(icono(ICONO_CARRITO));
+      boton.appendChild(el("span", "btn-txt"));
+      ponerTextoBoton(boton, "Agregar", " al carrito");
       conectarBotonAgregar(boton, p);
     } else {
       boton.textContent = "Agotado";
@@ -255,7 +307,7 @@
   function iniciarFicha() {
     document.querySelectorAll("[data-precio]").forEach(function (n) {
       const p = productoPorId(n.dataset.precio);
-      if (p) n.textContent = formatoPrecio(p.precio);
+      if (p) ponerPrecio(n, p.precio);
     });
     document.querySelectorAll("[data-estado]").forEach(function (n) {
       const p = productoPorId(n.dataset.estado);
@@ -276,10 +328,119 @@
     });
   }
 
+  // Fotos extra de un producto: las miniaturas cambian la foto principal.
+  function iniciarGaleria() {
+    const principal = document.getElementById("foto-principal");
+    if (!principal) return;
+    document.querySelectorAll(".miniaturas").forEach(function (cont) {
+      cont.addEventListener("click", function (e) {
+        const b = e.target.closest("button[data-foto]");
+        if (!b) return;
+        const ruta = b.dataset.foto;
+        if (ruta.indexOf(BASE + "img/") !== 0 || ruta.indexOf("..", BASE.length) !== -1) return;
+        principal.src = ruta;
+        cont.querySelectorAll("button").forEach(function (x) {
+          x.setAttribute("aria-pressed", String(x === b));
+        });
+      });
+    });
+  }
+
+  // Barra fija "Agregar al carrito" (solo teléfonos): aparece cuando el botón principal sale de la pantalla.
+  function iniciarBarraCompra() {
+    const barra = document.getElementById("barra-compra");
+    const principal = document.querySelector(".producto-acciones button[data-agregar]");
+    if (!barra || !principal) return;
+    function mostrar(si) {
+      barra.classList.toggle("visible", si);
+      document.body.classList.toggle("barra-visible", si);
+    }
+    if (!("IntersectionObserver" in window)) {
+      mostrar(true);
+      return;
+    }
+    new IntersectionObserver(function (entradas) {
+      const e = entradas[0];
+      mostrar(!e.isIntersecting && e.boundingClientRect.top < 0);
+    }).observe(principal);
+  }
+
+  // WhatsApp flotante: en la página de un producto el mensaje ya menciona ese producto.
+  function iniciarWhatsAppFlotante() {
+    const ficha = document.querySelector("[data-producto]");
+    const p = ficha ? productoPorId(ficha.dataset.producto) : null;
+    const boton = document.querySelector(".wa-flotante");
+    if (!p || !boton) return;
+    let texto = "Hola Studio 3, me interesa este producto: " + p.nombre;
+    if (/^https?:$/.test(window.location.protocol)) texto += "\n" + window.location.origin + window.location.pathname;
+    boton.href = "https://wa.me/" + CONFIG.whatsapp + "?text=" + encodeURIComponent(texto);
+  }
+
+  // Cuántos productos hay en cada categoría (tarjetas de la página de inicio).
+  function iniciarConteos() {
+    document.querySelectorAll("[data-conteo-cat]").forEach(function (n) {
+      const id = n.dataset.conteoCat;
+      n.textContent = textoConteo(PRODUCTOS.filter(function (p) { return p.categoria === id; }).length);
+    });
+  }
+
+  // Barra superior con la promoción de envío (lee CONFIG.envioGratisDesde).
+  function iniciarAviso() {
+    const t = document.getElementById("aviso-texto");
+    if (!t) return;
+    const umbral = CONFIG.envioGratisDesde;
+    t.textContent = typeof umbral === "number" && umbral > 0
+      ? "Entrega gratis en Masaya · Envío gratis desde " + formatoPrecio(umbral)
+      : "Entrega gratis en Masaya · Envíos a todo Nicaragua";
+  }
+
+  // Las secciones aparecen con un suave desvanecimiento al llegar a la pantalla (no con movimiento reducido).
+  function iniciarRevelado() {
+    if (!("IntersectionObserver" in window) ||
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const obs = new IntersectionObserver(function (entradas) {
+      entradas.forEach(function (e) {
+        if (!e.isIntersecting) return;
+        e.target.classList.add("visible");
+        obs.unobserve(e.target);
+      });
+    }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+    document.querySelectorAll("main .seccion").forEach(function (s) {
+      s.classList.add("revelar");
+      obs.observe(s);
+    });
+  }
+
+  // En las filas de chips con desplazamiento horizontal, deja visible el chip activo.
+  function centrarChip(chip) {
+    const cont = chip && chip.parentElement;
+    if (!cont || cont.scrollWidth <= cont.clientWidth) return;
+    cont.scrollLeft = chip.offsetLeft - (cont.clientWidth - chip.offsetWidth) / 2;
+  }
+
   // ---------- Cajón del carrito ----------
 
   const ui = {};
   let ultimoFoco = null;
+  let temporizadorAviso = null;
+
+  // Confirmación al agregar: el contador "rebota" y aparece un aviso con "Ver carrito".
+  function avisarAgregado(p) {
+    if (ui.contador) {
+      ui.contador.classList.remove("rebote");
+      void ui.contador.offsetWidth;
+      ui.contador.classList.add("rebote");
+    }
+    if (!ui.aviso || carritoAbierto()) return;
+    ui.avisoNombre.textContent = p.nombre;
+    ui.aviso.hidden = false;
+    clearTimeout(temporizadorAviso);
+    temporizadorAviso = setTimeout(ocultarAviso, 3500);
+  }
+
+  function ocultarAviso() {
+    if (ui.aviso) ui.aviso.hidden = true;
+  }
 
   function notificarCambio() {
     renderContador();
@@ -373,16 +534,27 @@
     items.forEach(function (it) {
       const p = productoPorId(it.id);
       const li = el("li", "linea");
-      li.appendChild(el("p", "linea-nombre", p.nombre));
+      const foto = el("img", "linea-img");
+      foto.src = BASE + p.imagen;
+      foto.alt = "";
+      foto.width = 64;
+      foto.height = 64;
+      foto.decoding = "async";
+      li.appendChild(foto);
+      const datos = el("div", "linea-datos");
+      datos.appendChild(el("p", "linea-nombre", p.nombre));
 
       const controles = el("div", "linea-controles");
       controles.appendChild(botonLinea("cant-btn", "−", "Quitar una unidad de " + p.nombre, "menos", p.id));
       controles.appendChild(el("span", "cant-valor", String(it.cant)));
       controles.appendChild(botonLinea("cant-btn", "+", "Agregar una unidad de " + p.nombre, "mas", p.id));
-      controles.appendChild(el("span", "linea-subtotal", formatoPrecio(p.precio * it.cant)));
-      li.appendChild(controles);
+      const subtotal = el("span", "linea-subtotal");
+      ponerPrecio(subtotal, p.precio * it.cant);
+      controles.appendChild(subtotal);
+      datos.appendChild(controles);
 
-      li.appendChild(botonLinea("linea-eliminar", "Eliminar", "Eliminar " + p.nombre + " del carrito", "eliminar", p.id));
+      datos.appendChild(botonLinea("linea-eliminar", "Eliminar", "Eliminar " + p.nombre + " del carrito", "eliminar", p.id));
+      li.appendChild(datos);
       ui.lineas.appendChild(li);
     });
 
@@ -403,6 +575,7 @@
 
   function abrirCarrito() {
     ultimoFoco = document.activeElement;
+    ocultarAviso();
     ui.overlay.hidden = false;
     ui.drawer.classList.add("abierto");
     ui.drawer.setAttribute("aria-hidden", "false");
@@ -471,6 +644,23 @@
     ui.enviar = document.getElementById("carrito-enviar");
     if (!ui.drawer || !ui.btnCarrito) return;
 
+    // Aviso "Agregado" (dentro de una región role="status" que siempre existe, para que los lectores de pantalla lo anuncien).
+    const zona = el("div", "aviso-zona");
+    zona.setAttribute("role", "status");
+    ui.aviso = el("div", "aviso-agregado");
+    ui.aviso.hidden = true;
+    const info = el("div", "aviso-info");
+    info.appendChild(el("strong", "", "✓ Agregado al carrito"));
+    ui.avisoNombre = el("span", "aviso-nombre");
+    info.appendChild(ui.avisoNombre);
+    const ver = el("button", "aviso-ver", "Ver carrito");
+    ver.type = "button";
+    ver.addEventListener("click", abrirCarrito);
+    ui.aviso.appendChild(info);
+    ui.aviso.appendChild(ver);
+    zona.appendChild(ui.aviso);
+    document.body.appendChild(zona);
+
     Carrito.cargar();
     notificarCambio();
 
@@ -508,7 +698,7 @@
       }
       // Mantiene el foco dentro del cajón mientras está abierto.
       if (e.key === "Tab" && carritoAbierto()) {
-        const focos = ui.drawer.querySelectorAll("button:not([disabled]), input, select");
+        const focos = ui.drawer.querySelectorAll("button:not([disabled]), a[href], input, select");
         if (focos.length === 0) return;
         const primero = focos[0];
         const ultimo = focos[focos.length - 1];
@@ -565,7 +755,7 @@
 
   // ---------- Arranque ----------
 
-  window.Studio3 = { formatoPrecio, limpiar, Carrito, tarjetaProducto, categoriaValida, abrirWhatsApp, el, origen };
+  window.Studio3 = { formatoPrecio, limpiar, Carrito, tarjetaProducto, categoriaValida, abrirWhatsApp, el, origen, centrarChip };
 
   guardarOrigen();
   iniciarEnlaces();
@@ -573,4 +763,11 @@
   iniciarCarrito();
   iniciarListas();
   iniciarFicha();
+  iniciarGaleria();
+  iniciarBarraCompra();
+  iniciarWhatsAppFlotante();
+  iniciarConteos();
+  iniciarAviso();
+  iniciarRevelado();
+  centrarChip(document.querySelector(".chips [aria-current='page']"));
 })();
