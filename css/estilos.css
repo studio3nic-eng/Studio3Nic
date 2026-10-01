@@ -215,6 +215,27 @@ p { margin: 0; }
 .btn-extra { display: none; }
 .tarjeta-producto.agotado .tarjeta-img { opacity: 0.55; }
 
+/* "Colores Disponibles": circulitos de color (sin variantes; los colores se confirman por WhatsApp) */
+.colores-bloque { display: flex; flex-wrap: wrap; align-items: center; gap: 0.3rem 0.6rem; margin-bottom: 0.5rem; }
+.colores-etiqueta { font-size: 0.78rem; font-weight: 500; color: var(--texto-suave); }
+.colores { list-style: none; margin: 0; padding: 0; display: flex; gap: 0.4rem; }
+.color-punto { width: 18px; height: 18px; border-radius: 50%; border: 1px solid rgba(15, 17, 21, 0.3); }
+.color-blanco { background: #FFFFFF; }
+.color-negro { background: #0F1115; }
+.color-gris { background: #8B93A1; }
+.color-plateado { background: #C9CED6; }
+.color-dorado { background: #D4AF37; }
+.color-azul { background: #1F6FEB; }
+.color-rojo { background: #D92D20; }
+.color-verde { background: #2E9E5B; }
+.color-rosado { background: #F6A6C1; }
+.color-morado { background: #7A4FD6; }
+.color-amarillo { background: #F5C518; }
+.color-naranja { background: #F28C28; }
+.producto-info .colores-bloque { margin: 0.25rem 0; }
+.producto-info .colores-etiqueta { font-size: 0.9rem; }
+.producto-info .color-punto { width: 24px; height: 24px; }
+
 /* Etiquetas sobre la foto */
 .insignia {
   position: absolute; top: 0.5rem; left: 0.5rem; max-width: calc(100% - 1rem); padding: 0.1rem 0.65rem;

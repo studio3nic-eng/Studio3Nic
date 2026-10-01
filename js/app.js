@@ -207,6 +207,29 @@
     });
   }
 
+  // Nombres de los colores permitidos en "colores" (las clases .color-<id> están en estilos.css).
+  const COLORES = {
+    blanco: "Blanco", negro: "Negro", gris: "Gris", plateado: "Plateado", dorado: "Dorado", azul: "Azul",
+    rojo: "Rojo", verde: "Verde", rosado: "Rosado", morado: "Morado", amarillo: "Amarillo", naranja: "Naranja"
+  };
+
+  // "Colores Disponibles" + circulitos; null si el producto no tiene "colores" válidos.
+  function bloqueColores(p) {
+    const lista = (Array.isArray(p.colores) ? p.colores : []).filter(function (c) { return tieneClave(COLORES, c); });
+    if (lista.length === 0) return null;
+    const bloque = el("div", "colores-bloque");
+    bloque.appendChild(el("span", "colores-etiqueta", "Colores Disponibles"));
+    const ul = el("ul", "colores");
+    lista.forEach(function (c) {
+      const li = el("li", "color-punto color-" + c);
+      li.title = COLORES[c];
+      li.appendChild(el("span", "sr-only", COLORES[c]));
+      ul.appendChild(li);
+    });
+    bloque.appendChild(ul);
+    return bloque;
+  }
+
   // Etiqueta sobre la foto: Agotado > "Ahorras C$ X" (combos) > "etiqueta" opcional del producto (p. ej. "Nuevo").
   function insigniaProducto(p) {
     if (!p.disponible) return el("span", "insignia insignia-agotado", "Agotado");
@@ -255,6 +278,8 @@
     const precio = el("p", "tarjeta-precio");
     ponerPrecio(precio, p.precio);
     cuerpo.appendChild(precio);
+    const colores = bloqueColores(p);
+    if (colores) cuerpo.appendChild(colores);
 
     const boton = el("button", "btn btn-primario btn-bloque");
     boton.type = "button";

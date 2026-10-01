@@ -110,6 +110,11 @@ foreach ($p in $PRODS) {
   foreach ($c in @($p.caracteristicas)) {
     if ($null -ne $c -and -not ([string]$c).Trim()) { $errores.Add("El producto ${id} tiene una característica vacía.") }
   }
+  foreach ($col in @($p.colores)) {
+    if ($null -ne $col -and -not ([string]$col -match '^(blanco|negro|gris|plateado|dorado|azul|rojo|verde|rosado|morado|amarillo|naranja)$')) {
+      $errores.Add("El producto ${id}: color no permitido '$col' (usa: blanco, negro, gris, plateado, dorado, azul, rojo, verde, rosado, morado, amarillo, naranja).")
+    }
+  }
   if ($null -ne $p.etiqueta -and ([string]$p.etiqueta).Length -gt 20) {
     $errores.Add("El producto ${id}: 'etiqueta' es demasiado larga (máximo 20 caracteres, ej. Nuevo).")
   }
@@ -126,6 +131,19 @@ if ($errores.Count -gt 0) {
 }
 
 # ---------- Ayudantes de productos ----------
+
+# Colores permitidos en "colores" (igual que COLORES en js/app.js; las clases .color-<id> están en estilos.css).
+$COLORES = [ordered]@{
+  blanco = "Blanco"; negro = "Negro"; gris = "Gris"; plateado = "Plateado"; dorado = "Dorado"; azul = "Azul"
+  rojo = "Rojo"; verde = "Verde"; rosado = "Rosado"; morado = "Morado"; amarillo = "Amarillo"; naranja = "Naranja"
+}
+# "Colores Disponibles" + circulitos; cadena vacía si el producto no tiene colores.
+function BloqueColores($p, [string]$sangria) {
+  $lista = @(@($p.colores) | Where-Object { $null -ne $_ -and $COLORES.Contains([string]$_) })
+  if ($lista.Count -eq 0) { return "" }
+  $puntos = ($lista | ForEach-Object { "<li class=`"color-punto color-$_`" title=`"$($COLORES[[string]$_])`"><span class=`"sr-only`">$($COLORES[[string]$_])</span></li>" }) -join ""
+  "$sangria<div class=`"colores-bloque`"><span class=`"colores-etiqueta`">Colores Disponibles</span><ul class=`"colores`">$puntos</ul></div>`n"
+}
 
 function Incluidos($p) { @(foreach ($i in @($p.incluye)) { if ($null -ne $i) { $porId[[string]$i] } }) }
 function Ahorro($p) {
@@ -173,7 +191,7 @@ function Tarjeta($p, [string]$pre) {
     <h3 class="tarjeta-nombre"><a href="$url">$nombre</a></h3>
 $extra    <p class="tarjeta-desc">$(Html $p.descripcion)</p>
     <p class="tarjeta-precio">$(PrecioHtml $p.precio)</p>
-    $boton
+$(BloqueColores $p "    ")    $boton
   </div>
 </article>
 "@
@@ -345,6 +363,7 @@ foreach ($p in $PRODS) {
     }) -join "`n"
     $v["GALERIA"] = "    <div class=`"galeria`">`n      $imgPrincipal`n      <div class=`"miniaturas`" role=`"group`" aria-label=`"Fotos del producto`">`n$minis`n      </div>`n    </div>"
   }
+  $v["COLORES"] = BloqueColores $p "      "
   $specs = @(@($p.caracteristicas) | Where-Object { $null -ne $_ })
   $v["CARACTERISTICAS"] = ""
   if ($specs.Count -gt 0) {

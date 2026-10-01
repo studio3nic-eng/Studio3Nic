@@ -22,6 +22,8 @@
 //   "etiqueta": "Nuevo"           -> cartelito sobre la foto (máx. 20 letras; ej. "Nuevo", "Más vendido").
 //   "imagenes": ["img/productos/<id>-2.webp"]  -> fotos extra: la página del producto muestra miniaturas.
 //   "caracteristicas": ["Carga rápida 20W", "Incluye cable"]  -> lista de características en la página del producto.
+//   "colores": ["blanco", "negro"] -> circulitos de "Colores Disponibles". Permitidos: blanco, negro, gris, plateado,
+//                                     dorado, azul, rojo, verde, rosado, morado, amarillo, naranja.
 
 const CATEGORIAS = [
   { "id": "power-banks", "nombre": "Power Banks",
@@ -61,6 +63,11 @@ const COMPLEMENTOS = {
 
 // TODO: reemplazar con productos reales
 const PRODUCTOS = [
+  { "id": "galaxy-buds-4-pro", "nombre": "Samsung Galaxy Buds 4 Pro - Calidad Premium", "categoria": "audifonos",
+    "precio": 900, "imagen": "img/productos/galaxy-buds-4-pro.jpg",
+    "imagenes": ["img/productos/galaxy-buds-4-pro-2.jpg", "img/productos/galaxy-buds-4-pro-3.jpg"],
+    "colores": ["blanco", "negro"],
+    "descripcion": "Audífonos inalámbricos Bluetooth con estuche de carga transparente.", "destacado": true, "disponible": true },
   { "id": "demo-pb-1", "nombre": "[PRUEBA] Power Bank 10,000 mAh carga rápida 20W", "categoria": "power-banks",
     "precio": 650, "imagen": "img/productos/placeholder.svg",
     "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
