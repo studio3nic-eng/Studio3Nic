@@ -7,7 +7,7 @@
   if (!form) return;
 
   const CANALES = ["Tienda física", "Redes sociales", "Ambos"];
-  const VOLUMENES = ["10–24 unidades", "25–49 unidades", "50 o más unidades"];
+  const VOLUMENES = ["5–24 unidades", "25–49 unidades", "50 o más unidades"];
 
   // Solo se aceptan valores que estén en la lista permitida.
   function permitido(valor, lista) {

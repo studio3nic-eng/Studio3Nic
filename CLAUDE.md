@@ -194,7 +194,7 @@ misma garantía) → how it works (aplica → revisamos y te enviamos la lista d
 primer pedido) → requirements (pedido mínimo inicial) → form `#form-revendedor`:
 Nombre completo* · Nombre del negocio · Ciudad o departamento* · Canal de venta (Tienda física /
 Redes sociales / Ambos) · Productos de interés (checkbox per category, name="interes") ·
-Volumen mensual estimado (10–24 / 25–49 / 50 o más unidades). Submit → validate with
+Volumen mensual estimado (5–24 / 25–49 / 50 o más unidades). Submit → validate with
 `reportValidity()` (required fields also use `pattern=".*\S.*"`) → WhatsApp message starting
 "Hola Studio 3, quiero ser emprendedor." (+ "Vengo de: …" when known).
 Wholesale prices are NEVER shown on the site.
