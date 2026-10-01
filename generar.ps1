@@ -111,8 +111,8 @@ foreach ($p in $PRODS) {
     if ($null -ne $c -and -not ([string]$c).Trim()) { $errores.Add("El producto ${id} tiene una característica vacía.") }
   }
   foreach ($col in @($p.colores)) {
-    if ($null -ne $col -and -not ([string]$col -match '^(blanco|negro|gris|plateado|dorado|azul|rojo|verde|rosado|morado|amarillo|naranja)$')) {
-      $errores.Add("El producto ${id}: color no permitido '$col' (usa: blanco, negro, gris, plateado, dorado, azul, rojo, verde, rosado, morado, amarillo, naranja).")
+    if ($null -ne $col -and -not ([string]$col -match '^(blanco|negro|gris|plateado|dorado|azul|rojo|verde|rosado|morado|amarillo|naranja|camuflaje)$')) {
+      $errores.Add("El producto ${id}: color no permitido '$col' (usa: blanco, negro, gris, plateado, dorado, azul, rojo, verde, rosado, morado, amarillo, naranja, camuflaje).")
     }
   }
   if ($null -ne $p.etiqueta -and ([string]$p.etiqueta).Length -gt 20) {
@@ -135,7 +135,7 @@ if ($errores.Count -gt 0) {
 # Colores permitidos en "colores" (igual que COLORES en js/app.js; las clases .color-<id> están en estilos.css).
 $COLORES = [ordered]@{
   blanco = "Blanco"; negro = "Negro"; gris = "Gris"; plateado = "Plateado"; dorado = "Dorado"; azul = "Azul"
-  rojo = "Rojo"; verde = "Verde"; rosado = "Rosado"; morado = "Morado"; amarillo = "Amarillo"; naranja = "Naranja"
+  rojo = "Rojo"; verde = "Verde"; rosado = "Rosado"; morado = "Morado"; amarillo = "Amarillo"; naranja = "Naranja"; camuflaje = "Camuflaje"
 }
 # "Colores Disponibles" + circulitos; cadena vacía si el producto no tiene colores.
 function BloqueColores($p, [string]$sangria) {

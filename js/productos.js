@@ -23,7 +23,7 @@
 //   "imagenes": ["img/productos/<id>-2.webp"]  -> fotos extra: la página del producto muestra miniaturas.
 //   "caracteristicas": ["Carga rápida 20W", "Incluye cable"]  -> lista de características en la página del producto.
 //   "colores": ["blanco", "negro"] -> circulitos de "Colores Disponibles". Permitidos: blanco, negro, gris, plateado,
-//                                     dorado, azul, rojo, verde, rosado, morado, amarillo, naranja.
+//                                     dorado, azul, rojo, verde, rosado, morado, amarillo, naranja, camuflaje.
 
 const CATEGORIAS = [
   { "id": "power-banks", "nombre": "Power Banks",
@@ -78,6 +78,11 @@ const PRODUCTOS = [
     "imagenes": ["img/productos/apple-watch-series-11-2.jpg", "img/productos/apple-watch-series-11-3.jpg"],
     "colores": ["blanco", "negro"],
     "descripcion": "Reloj inteligente con pantalla a color y correa de silicona. Incluye cable de carga.", "destacado": true, "disponible": true },
+  { "id": "jbl-charge-6", "nombre": "JBL Charge 6 - Calidad Premium", "categoria": "parlantes",
+    "precio": 1500, "imagen": "img/productos/jbl-charge-6.jpg",
+    "imagenes": ["img/productos/jbl-charge-6-2.jpg", "img/productos/jbl-charge-6-3.jpg"],
+    "colores": ["rojo", "negro", "azul", "camuflaje"],
+    "descripcion": "Parlante Bluetooth portátil con forro de tela y correas laterales.", "destacado": true, "disponible": false },
   { "id": "demo-pb-1", "nombre": "[PRUEBA] Power Bank 10,000 mAh carga rápida 20W", "categoria": "power-banks",
     "precio": 650, "imagen": "img/productos/placeholder.svg",
     "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
