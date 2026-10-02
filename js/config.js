@@ -4,9 +4,8 @@ const CONFIG = Object.freeze({
   moneda: "C$",
   cantidadMaxima: 20,
 
-  // Envío gratis fuera de Masaya a partir de este total (en córdobas). Pon null para desactivarlo.
-  // TODO: confirmar el monto real según el costo de CargoTrans y tu margen (placeholder).
-  envioGratisDesde: 3000,
+  // Envío gratis a Managua y al resto del país a partir de este total (en córdobas). Masaya siempre tiene entrega gratis. Pon null para desactivarlo.
+  envioGratisDesde: 2500,
 
   // Etiquetas de origen permitidas en los enlaces, p. ej. .../tienda.html?ref=ig
   // El nombre aparece en el pedido de WhatsApp como "Vengo de: Instagram".
@@ -22,6 +21,6 @@ const CONFIG = Object.freeze({
   redes: Object.freeze({
     instagram: "https://www.instagram.com/studio3.ni",
     tiktok: "https://www.tiktok.com/@studio3.ni",
-    facebook: "PEGAR-AQUI-EL-ENLACE-DE-FACEBOOK"
+    facebook: "https://www.facebook.com/share/1BtNzth1zg/?mibextid=wwXIfr"
   })
 });

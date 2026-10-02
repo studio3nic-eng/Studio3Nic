@@ -249,6 +249,8 @@ function Variables([string]$pre, [string]$activo) {
     P = $pre; A_inicio = ""; A_tienda = ""; A_emprender = ""; A_ayuda = ""
     HEAD_EXTRA = ""; JSONLD = ""; OG_TIPO = "website"; OG_IMAGEN = $OG_DEFECTO; SCRIPT = ""
     PIE_CATEGORIAS = $pie; AVISO = $AVISO
+    # Línea de "Envío gratis" de Ayuda (sale de CONFIG.envioGratisDesde; vacía si es null).
+    ENVIO_GRATIS_TEXTO = $(if ($UMBRAL -gt 0) { "      <li><strong>Envío gratis:</strong> en pedidos desde $(Precio $UMBRAL), el envío a Managua y al resto de Nicaragua es gratis.</li>" } else { "" })
   }
   if ($activo) { $v["A_$activo"] = ' aria-current="page"' }
   $v

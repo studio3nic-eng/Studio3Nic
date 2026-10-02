@@ -536,17 +536,21 @@
     const umbral = CONFIG.envioGratisDesde;
     ui.envio.hidden = Carrito.items().length === 0;
     ui.envio.classList.remove("logrado");
-    if (ui.entrega.value !== "otro") {
+    const destino = ui.entrega.value;
+    const lugar = destino === "managua" ? "a Managua" : "a todo Nicaragua";
+    if (destino === "masaya") {
       ui.envio.textContent = "Entrega gratis en Masaya.";
       ui.envio.classList.add("logrado");
     } else if (typeof umbral !== "number" || umbral <= 0) {
-      ui.envio.textContent = "Envío por CargoTrans: el costo se confirma por WhatsApp.";
+      ui.envio.textContent = destino === "managua"
+        ? "Entrega en Managua: el costo se confirma por WhatsApp."
+        : "Envío por CargoTrans: el costo se confirma por WhatsApp.";
     } else if (envioGratisLogrado(total)) {
-      ui.envio.textContent = "¡Tu pedido tiene envío gratis a todo Nicaragua!";
+      ui.envio.textContent = "¡Tu pedido tiene envío gratis " + lugar + "!";
       ui.envio.classList.add("logrado");
     } else {
       ui.envio.textContent = "Te faltan " + formatoPrecio(umbral - total) +
-        " para tener envío gratis a todo Nicaragua.";
+        " para tener envío gratis " + lugar + ".";
     }
   }
 
@@ -632,7 +636,11 @@
 
     const total = Carrito.total();
     let entrega = "Masaya (entrega gratis)";
-    if (ui.entrega.value === "otro") {
+    if (ui.entrega.value === "managua") {
+      entrega = envioGratisLogrado(total)
+        ? "Managua (envío gratis)"
+        : "Managua (entrega con costo)";
+    } else if (ui.entrega.value === "otro") {
       entrega = envioGratisLogrado(total)
         ? "Otro departamento (envío gratis por CargoTrans)"
         : "Otro departamento (envío por CargoTrans)";

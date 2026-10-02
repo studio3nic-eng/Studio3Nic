@@ -40,9 +40,9 @@ There are NO online payments. Launch date: Thursday, October 1, 2026.
 
 - WhatsApp: +505 8714-6561 → `50587146561` in wa.me links
 - Instagram: https://www.instagram.com/studio3.ni · TikTok: https://www.tiktok.com/@studio3.ni
-- Facebook: link pending — use placeholder `PEGAR-AQUI-EL-ENLACE-DE-FACEBOOK`
+- Facebook: https://www.facebook.com/share/1BtNzth1zg/?mibextid=wwXIfr (set in js/config.js and plantillas/pie.html)
 - Currency: córdobas, shown as `C$ 1,450` (setting in `js/config.js`)
-- Delivery: free in Masaya; rest of Nicaragua by CargoTrans (cost confirmed in chat)
+- Delivery: Masaya free; Managua paid (same-day before 4 PM); rest of Nicaragua by CargoTrans, paid (24–48 h). Free shipping to Managua and the rest of the country from C$ 2,500 (`CONFIG.envioGratisDesde`). Cash only for Masaya/Managua deliveries.
 - Sells retail and wholesale (resellers)
 
 ## File structure
