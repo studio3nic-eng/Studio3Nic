@@ -232,6 +232,8 @@ p { margin: 0; }
 .color-morado { background: #7A4FD6; }
 .color-amarillo { background: #F5C518; }
 .color-naranja { background: #F28C28; }
+.color-durazno { background: #F4B393; }
+.color-beige { background: #D9C7A7; }
 .color-camuflaje {
   background:
     radial-gradient(ellipse at 28% 30%, #4B5320 0 28%, transparent 30%),

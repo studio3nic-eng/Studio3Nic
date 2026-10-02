@@ -210,7 +210,7 @@
   // Nombres de los colores permitidos en "colores" (las clases .color-<id> están en estilos.css).
   const COLORES = {
     blanco: "Blanco", negro: "Negro", gris: "Gris", plateado: "Plateado", dorado: "Dorado", azul: "Azul",
-    rojo: "Rojo", verde: "Verde", rosado: "Rosado", morado: "Morado", amarillo: "Amarillo", naranja: "Naranja", camuflaje: "Camuflaje"
+    rojo: "Rojo", verde: "Verde", rosado: "Rosado", morado: "Morado", amarillo: "Amarillo", naranja: "Naranja", camuflaje: "Camuflaje", durazno: "Durazno", beige: "Beige"
   };
 
   // "Colores Disponibles" + circulitos; null si el producto no tiene "colores" válidos.

@@ -23,7 +23,7 @@
 //   "imagenes": ["img/productos/<id>-2.webp"]  -> fotos extra: la página del producto muestra miniaturas.
 //   "caracteristicas": ["Carga rápida 20W", "Incluye cable"]  -> lista de características en la página del producto.
 //   "colores": ["blanco", "negro"] -> circulitos de "Colores Disponibles". Permitidos: blanco, negro, gris, plateado,
-//                                     dorado, azul, rojo, verde, rosado, morado, amarillo, naranja, camuflaje.
+//                                     dorado, azul, rojo, verde, rosado, morado, amarillo, naranja, camuflaje, durazno, beige.
 
 const CATEGORIAS = [
   { "id": "power-banks", "nombre": "Power Banks",
@@ -78,11 +78,21 @@ const PRODUCTOS = [
     "imagenes": ["img/productos/apple-watch-series-11-2.jpg", "img/productos/apple-watch-series-11-3.jpg"],
     "colores": ["blanco", "negro"],
     "descripcion": "Reloj inteligente con pantalla a color y correa de silicona. Incluye cable de carga.", "destacado": true, "disponible": true },
+  { "id": "airpods-pro-max", "nombre": "AirPods Pro Max - Calidad Premium", "categoria": "audifonos",
+    "precio": 1300, "imagen": "img/productos/airpods-pro-max.jpg",
+    "imagenes": ["img/productos/airpods-pro-max-2.jpg", "img/productos/airpods-pro-max-3.jpg"],
+    "colores": ["blanco", "negro", "durazno", "beige", "verde", "rojo"],
+    "descripcion": "Audífonos inalámbricos de diadema con almohadillas acolchadas y estuche de transporte.", "destacado": true, "disponible": true },
   { "id": "jbl-charge-6", "nombre": "JBL Charge 6 - Calidad Premium", "categoria": "parlantes",
     "precio": 1500, "imagen": "img/productos/jbl-charge-6.jpg",
     "imagenes": ["img/productos/jbl-charge-6-2.jpg", "img/productos/jbl-charge-6-3.jpg"],
     "colores": ["rojo", "negro", "azul", "camuflaje"],
     "descripcion": "Parlante Bluetooth portátil con forro de tela y correas laterales.", "destacado": true, "disponible": false },
+  { "id": "jbl-go-5", "nombre": "JBL Go 5 - Calidad Premium", "categoria": "parlantes",
+    "precio": 850, "imagen": "img/productos/jbl-go-5.jpg",
+    "imagenes": ["img/productos/jbl-go-5-2.jpg", "img/productos/jbl-go-5-3.jpg"],
+    "colores": ["rojo", "azul", "negro"],
+    "descripcion": "Parlante Bluetooth portátil con correa de transporte. Incluye cable de carga.", "destacado": false, "disponible": true },
   { "id": "power-bank-ldnio-5000", "nombre": "Power Bank LDNIO 5,000 mAh", "categoria": "power-banks",
     "precio": 1000, "imagen": "img/productos/power-bank-ldnio-5000.jpg",
     "imagenes": ["img/productos/power-bank-ldnio-5000-2.jpg", "img/productos/power-bank-ldnio-5000-3.jpg"],
