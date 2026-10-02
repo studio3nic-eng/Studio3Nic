@@ -101,12 +101,6 @@ const PRODUCTOS = [
     "precio": 1200, "imagen": "img/productos/power-bank-ldnio-10000.jpg",
     "imagenes": ["img/productos/power-bank-ldnio-10000-2.jpg"],
     "descripcion": "Power bank con pantalla LED y dos cables integrados (USB-C y Lightning). Carga rápida de 20 W.", "destacado": false, "disponible": true },
-  { "id": "demo-pb-1", "nombre": "[PRUEBA] Power Bank 10,000 mAh carga rápida 20W", "categoria": "power-banks",
-    "precio": 650, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
-  { "id": "demo-pb-2", "nombre": "[PRUEBA] Power Bank 20,000 mAh con pantalla digital", "categoria": "power-banks",
-    "precio": 900, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
   { "id": "demo-pa-1", "nombre": "[PRUEBA] Parlante Bluetooth portátil resistente al agua", "categoria": "parlantes",
     "precio": 800, "imagen": "img/productos/placeholder.svg",
     "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
@@ -136,11 +130,5 @@ const PRODUCTOS = [
     "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
   { "id": "demo-cb-2", "nombre": "[PRUEBA] Cable USB-A a USB-C 2 m", "categoria": "cables",
     "precio": 200, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": false, "disponible": true },
-  { "id": "combo-prueba-viaje", "nombre": "[PRUEBA] Combo viaje: power bank + cable", "categoria": "combos",
-    "precio": 720, "imagen": "img/productos/placeholder.svg", "incluye": ["demo-pb-1", "demo-cb-1"],
-    "descripcion": "Combo de prueba. Define aquí el combo real y su precio.", "destacado": false, "disponible": true },
-  { "id": "combo-prueba-audio", "nombre": "[PRUEBA] Combo audio: audífonos + power bank", "categoria": "combos",
-    "precio": 1300, "imagen": "img/productos/placeholder.svg", "incluye": ["demo-au-1", "demo-pb-1"],
-    "descripcion": "Combo de prueba. Define aquí el combo real y su precio.", "destacado": false, "disponible": true }
+    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": false, "disponible": true }
 ];
