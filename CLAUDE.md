@@ -85,8 +85,8 @@ forgot to regenerate (new/renamed products still need a regenerate for their own
 
 ## Data format (`js/productos.js`)
 
-Categories (id → name): power-banks → Power Banks · parlantes → Parlantes · cargadores → Cargadores ·
-audifonos → Audífonos · smartwatches → Smartwatches · cables → Cables · combos → Combos.
+Categories (id → name): power-banks → Power Banks · parlantes → Parlantes ·
+audifonos → Audífonos · smartwatches → Smartwatches · combos → Combos. (cargadores and cables were removed 2026-10-02; re-add a category in productos.js when stock exists.)
 Each category also has `titulo` + `descripcion` (SEO copy for its category page).
 The home-page tiles show every category except `combos` (which has its own home section).
 
@@ -139,7 +139,7 @@ If `logo-plano.svg` isn't there yet, render the wordmark as text: "STUDIO" in Po
 On phones the links collapse into a "Menú" button; the cart stays visible.
 
 **Inicio:** hero — eyebrow "TECNOLOGÍA Y ACCESORIOS", H1 "Todo para tus dispositivos", subtitle
-"Power banks, parlantes, cargadores, audífonos, smartwatches y cables. Envíos a todo Nicaragua.",
+"Power banks, parlantes, audífonos y smartwatches. Envíos a todo Nicaragua.",
 buttons "Ver tienda" + "Escríbenos por WhatsApp", 3D logo on the right (below on mobile) →
 category tiles (link to `categoria/<id>.html`) → 8 featured products (`destacado: true`, `#destacados`) →
 "Combos y promociones" (only if the combos category has products) →
