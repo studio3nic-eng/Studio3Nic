@@ -23,7 +23,7 @@
 //   "imagenes": ["img/productos/<id>-2.webp"]  -> fotos extra: la página del producto muestra miniaturas.
 //   "caracteristicas": ["Carga rápida 20W", "Incluye cable"]  -> lista de características en la página del producto.
 //   "colores": ["blanco", "negro"] -> circulitos de "Colores Disponibles". Permitidos: blanco, negro, gris, plateado,
-//                                     dorado, azul, rojo, verde, rosado, morado, amarillo, naranja, camuflaje, durazno, beige.
+//                                     dorado, azul, rojo, verde, rosado, morado, amarillo, naranja, camuflaje, durazno, beige, menta, lila.
 
 const CATEGORIAS = [
   { "id": "power-banks", "nombre": "Power Banks",
@@ -70,6 +70,11 @@ const PRODUCTOS = [
     "imagenes": ["img/productos/apple-watch-series-11-2.jpg", "img/productos/apple-watch-series-11-3.jpg"],
     "colores": ["blanco", "negro"],
     "descripcion": "Reloj inteligente con pantalla a color y correa de silicona. Incluye cable de carga.", "destacado": true, "disponible": true },
+  { "id": "fajas-apple-watch", "nombre": "Fajas para Apple Watch", "categoria": "smartwatches",
+    "precio": 120, "imagen": "img/productos/fajas-apple-watch.jpg",
+    "imagenes": ["img/productos/fajas-apple-watch-2.jpg", "img/productos/fajas-apple-watch-3.jpg"],
+    "colores": ["menta", "lila", "negro", "durazno", "blanco"],
+    "descripcion": "Fajas de silicona compatibles con relojes de 42 a 46 mm.", "destacado": true, "disponible": true },
   { "id": "airpods-pro-max", "nombre": "AirPods Pro Max - Calidad Premium", "categoria": "audifonos",
     "precio": 1300, "imagen": "img/productos/airpods-pro-max.jpg",
     "imagenes": ["img/productos/airpods-pro-max-2.jpg", "img/productos/airpods-pro-max-3.jpg"],
@@ -85,6 +90,11 @@ const PRODUCTOS = [
     "imagenes": ["img/productos/jbl-charge-6-2.jpg", "img/productos/jbl-charge-6-3.jpg"],
     "colores": ["rojo", "negro", "azul", "camuflaje"],
     "descripcion": "Parlante Bluetooth portátil con forro de tela y correas laterales.", "destacado": true, "disponible": false },
+  { "id": "jbl-extreme-mini", "nombre": "JBL Extreme Mini - Calidad Premium", "categoria": "parlantes",
+    "precio": 1000, "imagen": "img/productos/jbl-extreme-mini.jpg",
+    "imagenes": ["img/productos/jbl-extreme-mini-2.jpg", "img/productos/jbl-extreme-mini-3.jpg"],
+    "colores": ["negro", "rojo", "gris", "azul"],
+    "descripcion": "Parlante Bluetooth portátil con correa de hombro y cable de carga.", "destacado": false, "disponible": true },
   { "id": "jbl-go-5", "nombre": "JBL Go 5 - Calidad Premium", "categoria": "parlantes",
     "precio": 850, "imagen": "img/productos/jbl-go-5.jpg",
     "imagenes": ["img/productos/jbl-go-5-2.jpg", "img/productos/jbl-go-5-3.jpg"],
