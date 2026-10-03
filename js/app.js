@@ -301,7 +301,7 @@
   // estén siempre al día aunque no se haya ejecutado generar.ps1.
   function listaProductos(tipo, id) {
     if (tipo === "destacados") {
-      return PRODUCTOS.filter(function (p) { return p.destacado; }).slice(0, 8);
+      return PRODUCTOS.filter(function (p) { return p.destacado; }).slice(0, 12);
     }
     if (tipo === "categoria") {
       return PRODUCTOS.filter(function (p) { return p.categoria === id; });

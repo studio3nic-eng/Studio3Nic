@@ -141,7 +141,7 @@ On phones the links collapse into a "Menú" button; the cart stays visible.
 **Inicio:** hero — eyebrow "TECNOLOGÍA Y ACCESORIOS", H1 "Todo para tus dispositivos", subtitle
 "Power banks, parlantes, audífonos y smartwatches. Envíos a todo Nicaragua.",
 buttons "Ver tienda" + "Escríbenos por WhatsApp", 3D logo on the right (below on mobile) →
-category tiles (link to `categoria/<id>.html`) → 8 featured products (`destacado: true`, `#destacados`) →
+category tiles (link to `categoria/<id>.html`) → up to 12 featured products (`destacado: true`, `#destacados`) →
 "Combos y promociones" (only if the combos category has products) →
 "Cómo comprar": 1. Elige tus productos y agrégalos al carrito. 2. Toca "Enviar pedido por WhatsApp".
 3. Te confirmamos disponibilidad, total y entrega por chat. → trust points (Ventas al por mayor y al

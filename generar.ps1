@@ -153,7 +153,7 @@ function Ahorro($p) {
   return [math]::Max(0, $suma - $p.precio)
 }
 function DeCategoria([string]$id) { @($PRODS | Where-Object { $_.categoria -eq $id }) }
-$DESTACADOS = @($PRODS | Where-Object { $_.destacado -eq $true } | Select-Object -First 8)
+$DESTACADOS = @($PRODS | Where-Object { $_.destacado -eq $true } | Select-Object -First 12)
 # Misma lógica que listaProductos("relacionados") en js/app.js.
 function Relacionados($p) {
   $lista = New-Object Collections.ArrayList
