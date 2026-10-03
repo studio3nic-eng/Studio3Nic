@@ -109,8 +109,7 @@ prefilled with the product name on product pages, tienda search + price sort (on
 horizontal scroll row on phones, scroll fade-in of `main .seccion`, smaller "C$" in prices, category tile counts.
 Not done (need owner/designer assets): real photos, transparent logo, testimonials, social photo grid, footer hours. `COMPLEMENTOS` maps category → categories suggested in the cart.
 Names follow the search pattern "qué es + capacidad/modelo + dato clave".
-Until real products arrive, placeholders are named "[PRUEBA] …" (12 products + 2 combos) with a
-neutral placeholder image, and the file keeps the `// TODO: reemplazar con productos reales` comment.
+All real products are in `js/productos.js`; the "[PRUEBA]" placeholders (and the two test combos) were removed on 2026-10-03. To add a product, give name, category, price, stock, featured, colors + photos (square .jpg ≈800 px, `img/productos/<id>.jpg`).
 
 ## Design system (from img/marca/)
 

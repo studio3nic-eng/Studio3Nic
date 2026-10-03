@@ -1,5 +1,4 @@
 // Único archivo que se edita para precios, disponibilidad y productos.
-// TODO: reemplazar con productos reales (ids, nombres, precios y fotos en img/productos/).
 //
 // FORMATO (importante):
 //   - Usa comillas dobles en todo: "nombre": "Cable USB-C 1 m"
@@ -53,7 +52,6 @@ const COMPLEMENTOS = {
   "combos": []
 };
 
-// TODO: reemplazar con productos reales
 const PRODUCTOS = [
   { "id": "galaxy-buds-4-pro", "nombre": "Samsung Galaxy Buds 4 Pro - Calidad Premium", "categoria": "audifonos",
     "precio": 900, "imagen": "img/productos/galaxy-buds-4-pro.jpg",
@@ -112,23 +110,5 @@ const PRODUCTOS = [
   { "id": "power-bank-ldnio-10000", "nombre": "Power Bank LDNIO 10,000 mAh", "categoria": "power-banks",
     "precio": 1200, "imagen": "img/productos/power-bank-ldnio-10000.jpg",
     "imagenes": ["img/productos/power-bank-ldnio-10000-2.jpg"],
-    "descripcion": "Power bank con pantalla LED y dos cables integrados (USB-C y Lightning). Carga rápida de 20 W.", "destacado": false, "disponible": true },
-  { "id": "demo-pa-1", "nombre": "[PRUEBA] Parlante Bluetooth portátil resistente al agua", "categoria": "parlantes",
-    "precio": 800, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
-  { "id": "demo-pa-2", "nombre": "[PRUEBA] Parlante Bluetooth con luces LED", "categoria": "parlantes",
-    "precio": 1200, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": false },
-  { "id": "demo-au-1", "nombre": "[PRUEBA] Audífonos inalámbricos con estuche de carga", "categoria": "audifonos",
-    "precio": 750, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
-  { "id": "demo-au-2", "nombre": "[PRUEBA] Audífonos de diadema Bluetooth", "categoria": "audifonos",
-    "precio": 1100, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": false, "disponible": true },
-  { "id": "demo-sw-1", "nombre": "[PRUEBA] Smartwatch con monitor de ritmo cardíaco", "categoria": "smartwatches",
-    "precio": 1450, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": true, "disponible": true },
-  { "id": "demo-sw-2", "nombre": "[PRUEBA] Smartwatch deportivo resistente al agua", "categoria": "smartwatches",
-    "precio": 1900, "imagen": "img/productos/placeholder.svg",
-    "descripcion": "Descripción de prueba. Escribe aquí las características reales.", "destacado": false, "disponible": true }
+    "descripcion": "Power bank con pantalla LED y dos cables integrados (USB-C y Lightning). Carga rápida de 20 W.", "destacado": false, "disponible": true }
 ];
