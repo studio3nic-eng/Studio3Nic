@@ -141,7 +141,7 @@ $COLORES = [ordered]@{
 function BloqueColores($p, [string]$sangria) {
   $lista = @(@($p.colores) | Where-Object { $null -ne $_ -and $COLORES.Contains([string]$_) })
   if ($lista.Count -eq 0) { return "" }
-  $puntos = ($lista | ForEach-Object { "<li class=`"color-punto color-$_`" title=`"$($COLORES[[string]$_])`"><span class=`"sr-only`">$($COLORES[[string]$_])</span></li>" }) -join ""
+  $puntos = ($lista | ForEach-Object { "<li class=`"color-item`" title=`"$($COLORES[[string]$_])`"><span class=`"color-punto color-$_`"></span><span class=`"color-nombre`">$($COLORES[[string]$_])</span></li>" }) -join ""
   "$sangria<div class=`"colores-bloque`"><span class=`"colores-etiqueta`">Colores Disponibles</span><ul class=`"colores`">$puntos</ul></div>`n"
 }
 

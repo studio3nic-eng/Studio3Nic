@@ -221,9 +221,10 @@
     bloque.appendChild(el("span", "colores-etiqueta", "Colores Disponibles"));
     const ul = el("ul", "colores");
     lista.forEach(function (c) {
-      const li = el("li", "color-punto color-" + c);
+      const li = el("li", "color-item");
       li.title = COLORES[c];
-      li.appendChild(el("span", "sr-only", COLORES[c]));
+      li.appendChild(el("span", "color-punto color-" + c));
+      li.appendChild(el("span", "color-nombre", COLORES[c]));
       ul.appendChild(li);
     });
     bloque.appendChild(ul);
