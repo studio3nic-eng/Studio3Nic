@@ -8,8 +8,8 @@ There are NO online payments. Launch date: Thursday, October 1, 2026.
 
 - All customer-facing text in **Spanish** (`<html lang="es">`). Talk to me in English.
 - **Plain HTML, CSS and vanilla JavaScript.** No frameworks, no npm, no server-side build.
-  Hosted on **GitHub Pages** (repo `studio3nic-eng/Studio3Nic`, branch `main`, folder `/`,
-  URL https://studio3nic-eng.github.io/Studio3Nic/); the repo is deployed as-is.
+  Hosted on **Cloudflare** at https://studio3.store (source repo `studio3nic-eng/Studio3Nic`, branch `main`,
+  folder `/`); the repo is deployed as-is. Cloudflare honors `_headers`; the CSP is still also a `<meta>` tag.
 - **HTML pages are generated.** `generar.ps1` (Windows PowerShell 5.1, no installs) builds every
   `.html` from `plantillas/` + `js/productos.js`. Edit templates, never the generated `.html`
   (root pages, `categoria/`, `producto/`). Run it (or `preview.cmd`, which runs it) and commit the output.
@@ -20,7 +20,7 @@ There are NO online payments. Launch date: Thursday, October 1, 2026.
     All JS in `/js`, loaded with `<script src="…" defer>`; all CSS in `/css`.
     Only exception: `<script type="application/ld+json">` data blocks written by `generar.ps1`
     (not executable; `</` escaped as `<\/`).
-  - GitHub Pages ignores `_headers`, so the CSP is also a `<meta http-equiv>` in every page
+  - `_headers` was ignored on the old GitHub Pages host, so the CSP is also a `<meta http-equiv>` in every page
     (same policy minus `frame-ancestors`/`upgrade-insecure-requests`, which meta can't set).
   - Insert product and customer text with `textContent` / `createElement`, never `innerHTML`.
   - The cart in localStorage stores only `{id, cant}`. Names and prices always come from
@@ -78,7 +78,7 @@ fuentes/              poppins-400/500/700/800.woff2
 
 Every page has the same head, header, cart drawer, footer, floating WhatsApp button and base scripts
 (config.js → productos.js → app.js); they come from the shared templates. `<body data-base>` holds the
-path prefix ("" at root, "../" in categoria/ and producto/, "/Studio3Nic/" in 404.html).
+path prefix ("" at root, "../" in categoria/ and producto/, "/" in 404.html).
 Generated pages carry static product cards for Google and link previews; at runtime `app.js` redraws
 every `[data-lista]` from `productos.js`, so prices and stock are always current even if the owner
 forgot to regenerate (new/renamed products still need a regenerate for their own pages).

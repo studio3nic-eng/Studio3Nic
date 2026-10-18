@@ -7,7 +7,7 @@ param([switch]$Silencioso)
 $ErrorActionPreference = "Stop"
 
 # Dirección pública del sitio, sin "/" al final. Cámbiala cuando tengas dominio propio.
-$SITIO = "https://studio3nic-eng.github.io/Studio3Nic"
+$SITIO = "https://studio3.store"
 
 $raiz = $PSScriptRoot
 $u8 = New-Object System.Text.UTF8Encoding($false)
